@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="../../fonts/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../fonts/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../css/module/backStage/styles.css">
+    <link rel="stylesheet" href="../../css/module/backStage/formSearch.css">
+
+</head>
+<body class="sidebar-fixed header-fixed">
+
+<div class="page-wrapper">
+    <!--修改店铺弹窗 Y方向滚动样式-->
+    <div id="editShop" class="edit" style="overflow-y: scroll"></div>
+    <script id="editShopTmpl" type="text/x-jsrender">
+        <h1>编辑</h1>
+        <div class="edit-item">
+            <label for="editShopAccount">店铺账号</label>
+            <input type="text" id="editSAccount" value="{{:shopAccount}}" readonly>
+        </div>
+        <div class="edit-item">
+            <label for="editShopAccount">店铺名称</label>
+            <input type="text" id="editSName" value="{{:shopName}}">
+        </div>
+        <div class="edit-item">
+            <label for="editShopAccount">店主账号</label>
+            <input type="text" id="editUAccount" value="{{:shopUserAccount}}">
+        </div>
+        <div class="edit-item">
+            <label for="editShopAccount">店主名</label>
+            <input type="text" id="editUName" value="{{:shopUserName}}">
+        </div>
+        <div class="edit-item">
+            <label for="editShopAccount">店铺交易额</label>
+            <input type="text" id="editSMoney" value="{{:shopMoney}}">
+        </div>
+        <div class="edit-item">
+            <label for="editShopAccount">店铺交易数</label>
+            <input type="text" id="editSNumber" value="{{:shopNumber}}">
+        </div>
+        <div class="edit-item">
+            <label for="editShopAccount">店铺等级</label>
+            <input type="text" id="editSLevel" value="{{:shopLevel}}">
+        </div>
+        <div class="edit-item">
+            <label for="editShopAccount">店铺状态</label>
+            <input type="text" id="editSStatus" value="{{:shopStatus}}">
+        </div>
+        <div class="edit-item">
+            <label for="editShopAccount">店铺营运时间</label>
+            <input type="text" id="editSStartTime" value="{{:shopStartTime}}" readonly>
+        </div>
+        <div class="edit-item">
+            <button id="editShopSave">保存</button>
+            <button class="editCancle">取消</button>
+        </div>
+    </script>
+    <!--新增用户-->
+    <div id="addUser" class="edit" style="overflow-y: scroll">
+        <h1>新增</h1>
+        <div class="edit-item">
+            <label for="">用户账号</label>
+            <input type="text" id="addAccount" required>
+        </div>
+        <div class="edit-item">
+            <label for="">用户名称</label>
+            <input type="text" id="addName" required>
+        </div>
+        <div class="edit-item">
+            <label for="">用户密码</label>
+            <input type="password" id="addPassword" required>
+        </div>
+        <div class="edit-item">
+        <label for="addSexy">用户性别</label>
+            <select id="addSexy">
+                <option value="">请选择</option>
+                <option value="M">男</option>
+                <option value="F">女</option>
+            </select>
+        <!--<input type="text" id="addSexy">-->
+        </div>
+        <div class="edit-item">
+            <label for="">用户生日</label>
+            <input type="text" id="addBirth">
+        </div>
+        <div class="edit-item">
+            <label for="">用户手机号</label>
+            <input type="text" id="addPhone" required>
+        </div>
+        <div class="edit-item">
+            <label for="">用户邮箱</label>
+            <input type="text" id="addEmail">
+        </div>
+        <div class="edit-item">
+            <label for="">用户积分</label>
+            <input type="text" id="addScore">
+        </div>
+        <div class="edit-item">
+            <label for="">用户等级</label>
+            <input type="text" id="addLevel">
+        </div>
+        <div class="edit-item">
+            <button id="addSave">新增</button>
+            <button class="cancel">取消</button>
+        </div>
+    </div>
+    <!--修改用户信息弹窗-->
+    <div id="editUser" class="edit" style="overflow-y: scroll"></div>
+    <script id="editUserTmpl" type="text/x-jsrender">
+        <h1>编辑</h1>
+        <div class="edit-item">
+            <label for="">用户账号</label>
+            <input type="text" id="editAccount" value="{{:userAccount}}" readonly/>
+        </div>
+        <div class="edit-item">
+            <label for="">用户名称</label>
+            <input type="text" id="editName" value="{{:userName}}"/>
+        </div>
+        <div class="edit-item">
+            <label for="">帐号密码</label>
+            <input type="password" id="editPassword" value="{{:userPassword}}" />
+        </div>
+        <div class="edit-item">
+            <label for="">用户性别</label>
+            <input type="text" id="editSexy" value="{{:userSexy}}"/>
+        </div>
+        <div class="edit-item">
+            <label for="">用户手机号</label>
+            <input type="text" id="editPhone" value="{{:userPhoneNum}}"/>
+        </div>
+        <div class="edit-item">
+            <label for="">用户邮箱</label>
+            <input type="text" id="editEmail" value="{{:userEmail}}"/>
+        </div>
+        <div class="edit-item">
+            <label for="">用户帐号状态</label>
+            <input type="text" id="userStatus" value="{{:userAccountStatus}}"/>
+        </div>
+
+        <div class="edit-item">
+            <label for="">用户积分</label>
+            <input type="text" id="editScore" value="{{:userIntegral}}"/>
+        </div>
+        <div class="edit-item">
+            <label for="">用户等级</label>
+            <input type="text" id="editLevel" value="{{:userLevelId}}"/>
+        </div>
+        <div class="edit-item">
+            <button id="editUserSave">保存</button>
+            <button class="cancel">取消</button>
+        </div>
+    </script>
+    <!--新增商品-->
+    <div id="addProduct" class="edit" style="overflow-y: scroll">
+        <h1>新增</h1>
+        <div class="edit-item">
+            <label for="">商品名称</label>
+            <input type="text" id="addPName"/>
+        </div>
+        <div class="edit-item">
+            <label for="">商品类别</label>
+            <input type="text" id="addPType"/>
+        </div>
+        <div class="edit-item">
+            <label for="">商品价格</label>
+            <input type="text" id="addPPrice"/>
+        </div>
+        <div class="edit-item">
+            <label for="">商品是否下架</label>
+            <input type="text" id="addPStatus"/>
+        </div>
+        <div class="edit-item">
+            <label for="">商品描述</label>
+            <input type="text" id="addPDesc"/>
+        </div>
+        <div class="edit-item">
+            <label for="">商品尺寸</label>
+            <input type="text" id="addPSize"/>
+        </div>
+        <div class="edit-item">
+            <label for="">商品颜色</label>
+            <input type="text" id="addPColor"/>
+        </div>
+        <div class="edit-item">
+            <button id="addProSave">新增</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ">保存</button>
+            <button class="editCancle">取消</button>
+        </div>
+    </div>
+    <!--右侧顶部图标-->
+    <div class="page-header">
+        <nav class="navbar page-header">
+            <a href="#" class="btn btn-link sidebar-mobile-toggle d-md-none mr-auto">
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+                <i class="fa fa-bars"></i>
+            </a>
+            <!--右侧图标-->
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../../images/background/avatar-1.png" class="avatar avatar-sm" alt="logo">
+                        <span class="small ml-1 d-md-down-none">John Smith</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-header">Account</div>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-user"></i> Profile
+                        </a>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-envelope"></i> Messages
+                        </a>
+
+                        <div class="dropdown-header">Settings</div>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-bell"></i> Notifications
+                        </a>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-wrench"></i> Settings
+                        </a>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-lock"></i> Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-container">
+        <!--左侧导航内容-->
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <li class="nav-title">常用</li>
+
+                    <li class="nav-item">
+                        <a href="backStage.html" class="nav-link active">
+                            <i class="icon icon-speedometer"></i> 首页
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="UserManage.html" class="nav-link">
+                            <i class="icon icon-speedometer"></i> 用户管理 <i ></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="Community.html" class="nav-link">
+                            <i class="icon icon-speedometer"></i> 社区管理 <i ></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="Manager.html" class="nav-link">
+                            <i class="icon icon-puzzle"></i> 管理员管理
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="ShopMallManage.html" class="nav-link">
+                            <i class="icon icon-grid"></i> 商城管理
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content">
+            <!--搜索用户-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-groups">
+                        <div class="form-item">
+                            <label for="">用户帐号:</label>
+                            <input type="text" id="userAccountSearch">
+                        </div>
+                        <div class="form-item">
+                            <label for="">用户名:</label>
+                            <input type="text" id="userNameSearch">
+                        </div>
+                        <div class="form-item">
+                            <button id="btnSearchUser">查询</button>
+                            <button id="btnAddUser">新增</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--订单搜索-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-groups">
+                        <div class="form-item">
+                            <label for="">订单编号:</label>
+                            <input type="text" id="productIdSearch">
+                        </div>
+                        <div class="form-item">
+                            <label for="">店铺账号:</label>
+                            <input type="text" id="orderSAccountSearch">
+                        </div>
+                        <div class="form-item">
+                            <label for="">用户账号:</label>
+                            <input type="text" id="orderUAccountSearch">
+                        </div>
+                        <div class="form-item">
+                            <label for="">商品名:</label>
+                            <input type="text" id="orderPNameSearch">
+                        </div>
+                        <div class="form-item">
+                            <button id="btnOrderSearch">查询</button>
+                            <!--<button id="btnProAdd">新增</button>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--用户列表-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            用户列表
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>用户帐号</th>
+                                        <th>用户名称</th>
+                                        <th>用户等级</th>
+                                        <th>用户积分</th>
+                                        <th>用户手机号</th>
+                                        <th style="text-align: center">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="userList">
+                                    </tbody>
+                                    <script id="userListTmpl" type="text/x-jsrender">
+                                        {{for}}
+                                            <tr>
+                                                <td>{{:userAccount}}</td>
+                                                <td>{{:userName}}</td>
+                                                <td>{{:userLevelId}}</td>
+                                                <td>{{:userIntegral}}</td>
+                                                <td>{{:userPhoneNum}}</td>
+                                                <td style="text-align:center;">
+                                                    <button class="btnGet" userAccount={{:userAccount}}>查看</button>
+                                                    <button class="btnEdit" userAccount={{:userAccount}} style="margin-left:10px">编辑</button>
+                                                    <button class="btnDel" userAccount={{:userAccount}} style="margin-left:10px">删除</button>
+                                                </td>
+                                            </tr>
+                                        {{/for}}
+
+                                    </script>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--订单管理-->
+            <div class="row" id="orderManage" style="display: none;">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            订单管理
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>订单编号</th>
+                                        <th>用户账号</th>
+                                        <th>店家账号</th>
+                                        <th>商品名</th>
+                                        <th>商品价格</th>
+                                        <th>商品数量</th>
+                                        <th>交易价格</th>
+                                        <th style="text-align:center">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="orderList"></tbody>
+                                    <script id="orderListTmpl" type="text/x-jsrender">
+                                        {{for}}
+                                        <tr>
+                                            <td>{{:userOrdeId}}</td>
+                                            <td>{{:userAccount}}</td>
+                                            <td>{{:merchantAccount}}</td>
+                                            <td>{{:commodityName}}</td>
+                                            <td>{{:commodityPrice}}</td>
+                                            <td>{{:commodityNumber}}</td>
+                                            <td>{{:orderMoney}}</td>
+                                            <td style="text-align:center">
+                                                <button class="btnEditOrder" orderId={{:userOrdeId}}>编辑</button>
+                                                <button class="btnDelOrder" orderId={{:userOrdeId}} style="margin-left:10px;">删除</button>
+                                            </td>
+                                         </tr>
+                                         {{/for}}
+                                    </script>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--用户好友列表-->
+            <div class="row" id="friendManage" style="display: none">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            好友管理
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>好友编号</th>
+                                        <th>好友账号</th>
+                                        <th>好友昵称</th>
+                                        <th>好友备注</th>
+                                        <th>好友状态</th>
+                                        <th style="text-align:center">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="friendList">
+                                    </tbody>
+                                    <script id="friendListTmpl" type="text/x-jsrender">
+                                        {{for}}
+                                        <tr>
+                                            <td>{{:#getIndex()+1}}</td>
+                                            <td>{{:friendedUserAccount}}</td>
+                                            <td>{{:friendedUserName}}</td>
+                                            <td>{{:friendNickname}}</td>
+                                            <td>{{:friendStatus}}</td>
+                                            <td style="text-align:center">
+                                                <!--<button class="btnEdit" commodityId={{:commodityId}}>编辑</button>-->
+                                                <button class="btnDelFriend" accounting={{:friendingUserUccount}} accounted={{:friendedUserAccount}} style="margin-left:10px;">删除</button>
+                                            </td>
+                                         </tr>
+                                         {{/for}}
+                                    </script>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--用户收藏管理-->
+            <div class="row" id="focusManage" style="display: none">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            用户收藏管理
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>收藏编号</th>
+                                        <th>收藏标题</th>
+                                        <th>收藏物账号</th>
+                                        <th>收藏备注</th>
+                                        <th style="text-align:center">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="collectList">
+
+                                    </tbody>
+                                    <script id="collectListTmpl" type="text/x-jsrender">
+                                        {{for}}
+                                        <tr>
+                                            <td>{{:#getIndex()+1}}</td>
+                                            <td>{{:collectionExt}}</td>
+                                            <td>{{:collectedAccout}}</td>
+                                            <td>{{:collectionRemark}}</td>
+                                            <td style="text-align:center">
+                                                <!--<button class="btnEdit" collectId={{:collectionId}}>编辑</button>-->
+                                                <button class="btnDelCollect" collectId={{:collectionId}} style="margin-left:10px;">删除</button>
+                                            </td>
+                                         </tr>
+                                         {{/for}}
+                                    </script>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/util/jquery-i18n/jquery/jquery.min.js"></script>
+<script src="../../js/util/popper.js/popper.min.js"></script>
+<script src="../../js/util/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../js/util/chart.js/chart.min.js"></script>
+<script src="../../js/module/backStage/carbon.js"></script>
+<script src="../../js/module/backStage/demo.js"></script>
+<script type="text/javascript" src="../../js/util/seajs/2.3.0/dist/sea.js"></script>
+<script type="text/javascript" src="../../js/util/config.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        //配置基础路径
+        base:'/EBusiness/js/',
+        alias:{
+            'jquery':'util/jquery/1.9.1/jquery',
+//            'jquery':'util/jquery-i18n/jquery/jquery.min',
+        },
+        paths:{
+            'js':'http://localhost:8085/EBusiness/js/'
+        },
+        charset:'utf-8',
+    })
+
+    seajs.use(['module/backStage/UserManage'],function (userManage) {
+//        shopMall.shopInfo();
+//        shopMall.productInfo();
+
+    })
+</script>
+</body>
+</html>

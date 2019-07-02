@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.CommodityBaseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.CommodityBaseInfo" >
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_type_id" property="commodityTypeId" jdbcType="INTEGER" />
+    <result column="commodity_start_time" property="commodityStartTime" jdbcType="TIMESTAMP" />
+    <result column="commodity_end_time" property="commodityEndTime" jdbcType="TIMESTAMP" />
+    <result column="commodity_status" property="commodityStatus" jdbcType="INTEGER" />
+    <result column="commodity_img" property="commodityImg" jdbcType="VARCHAR" />
+    <result column="commodity_price" property="commodityPrice" jdbcType="DECIMAL" />
+    <result column="commodity_desc" property="commodityDesc" jdbcType="VARCHAR" />
+    <result column="commodity_size" property="commoditySize" jdbcType="DOUBLE" />
+    <result column="commodity_color" property="commodityColor" jdbcType="VARCHAR" />
+    <result column="commodity_ext1" property="commodityExt1" jdbcType="VARCHAR" />
+    <result column="commodity_ext2" property="commodityExt2" jdbcType="VARCHAR" />
+    <result column="commodity_ext3" property="commodityExt3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    commodity_id, commodity_name, commodity_type_id, commodity_start_time, commodity_end_time, 
+    commodity_status, commodity_img, commodity_price, commodity_desc, commodity_size, 
+    commodity_color, commodity_ext1, commodity_ext2, commodity_ext3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.CommodityBaseInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from commodity_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.CommodityBaseInfoExample" >
+    delete from commodity_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.CommodityBaseInfo" >
+    insert into commodity_base_info (commodity_id, commodity_name, commodity_type_id, 
+      commodity_start_time, commodity_end_time, 
+      commodity_status, commodity_img, commodity_price, 
+      commodity_desc, commodity_size, commodity_color, 
+      commodity_ext1, commodity_ext2, commodity_ext3
+      )
+    values (#{commodityId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, #{commodityTypeId,jdbcType=INTEGER}, 
+      #{commodityStartTime,jdbcType=TIMESTAMP}, #{commodityEndTime,jdbcType=TIMESTAMP}, 
+      #{commodityStatus,jdbcType=INTEGER}, #{commodityImg,jdbcType=VARCHAR}, #{commodityPrice,jdbcType=DECIMAL}, 
+      #{commodityDesc,jdbcType=VARCHAR}, #{commoditySize,jdbcType=DOUBLE}, #{commodityColor,jdbcType=VARCHAR}, 
+      #{commodityExt1,jdbcType=VARCHAR}, #{commodityExt2,jdbcType=VARCHAR}, #{commodityExt3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.CommodityBaseInfo" >
+    insert into commodity_base_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="commodityTypeId != null" >
+        commodity_type_id,
+      </if>
+      <if test="commodityStartTime != null" >
+        commodity_start_time,
+      </if>
+      <if test="commodityEndTime != null" >
+        commodity_end_time,
+      </if>
+      <if test="commodityStatus != null" >
+        commodity_status,
+      </if>
+      <if test="commodityImg != null" >
+        commodity_img,
+      </if>
+      <if test="commodityPrice != null" >
+        commodity_price,
+      </if>
+      <if test="commodityDesc != null" >
+        commodity_desc,
+      </if>
+      <if test="commoditySize != null" >
+        commodity_size,
+      </if>
+      <if test="commodityColor != null" >
+        commodity_color,
+      </if>
+      <if test="commodityExt1 != null" >
+        commodity_ext1,
+      </if>
+      <if test="commodityExt2 != null" >
+        commodity_ext2,
+      </if>
+      <if test="commodityExt3 != null" >
+        commodity_ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTypeId != null" >
+        #{commodityTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityStartTime != null" >
+        #{commodityStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityEndTime != null" >
+        #{commodityEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityStatus != null" >
+        #{commodityStatus,jdbcType=INTEGER},
+      </if>
+      <if test="commodityImg != null" >
+        #{commodityImg,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null" >
+        #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityDesc != null" >
+        #{commodityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySize != null" >
+        #{commoditySize,jdbcType=DOUBLE},
+      </if>
+      <if test="commodityColor != null" >
+        #{commodityColor,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityExt1 != null" >
+        #{commodityExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityExt2 != null" >
+        #{commodityExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityExt3 != null" >
+        #{commodityExt3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.CommodityBaseInfoExample" resultType="java.lang.Integer" >
+    select count(*) from commodity_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update commodity_base_info
+    <set >
+      <if test="record.commodityId != null" >
+        commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityName != null" >
+        commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityTypeId != null" >
+        commodity_type_id = #{record.commodityTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityStartTime != null" >
+        commodity_start_time = #{record.commodityStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commodityEndTime != null" >
+        commodity_end_time = #{record.commodityEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commodityStatus != null" >
+        commodity_status = #{record.commodityStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityImg != null" >
+        commodity_img = #{record.commodityImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityPrice != null" >
+        commodity_price = #{record.commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.commodityDesc != null" >
+        commodity_desc = #{record.commodityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commoditySize != null" >
+        commodity_size = #{record.commoditySize,jdbcType=DOUBLE},
+      </if>
+      <if test="record.commodityColor != null" >
+        commodity_color = #{record.commodityColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityExt1 != null" >
+        commodity_ext1 = #{record.commodityExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityExt2 != null" >
+        commodity_ext2 = #{record.commodityExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityExt3 != null" >
+        commodity_ext3 = #{record.commodityExt3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update commodity_base_info
+    set commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      commodity_type_id = #{record.commodityTypeId,jdbcType=INTEGER},
+      commodity_start_time = #{record.commodityStartTime,jdbcType=TIMESTAMP},
+      commodity_end_time = #{record.commodityEndTime,jdbcType=TIMESTAMP},
+      commodity_status = #{record.commodityStatus,jdbcType=INTEGER},
+      commodity_img = #{record.commodityImg,jdbcType=VARCHAR},
+      commodity_price = #{record.commodityPrice,jdbcType=DECIMAL},
+      commodity_desc = #{record.commodityDesc,jdbcType=VARCHAR},
+      commodity_size = #{record.commoditySize,jdbcType=DOUBLE},
+      commodity_color = #{record.commodityColor,jdbcType=VARCHAR},
+      commodity_ext1 = #{record.commodityExt1,jdbcType=VARCHAR},
+      commodity_ext2 = #{record.commodityExt2,jdbcType=VARCHAR},
+      commodity_ext3 = #{record.commodityExt3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

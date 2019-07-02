@@ -1,0 +1,40 @@
+/*店铺信息选择项样式*/
+.choseLog{
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+/*店铺基本信息*/
+#shopBaseInfo>div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#shopBaseInfo>div>label{
+    vertical-align: middle;
+    width: 20%;
+    text-align: right;
+}
+#shopBaseInfo>div>input{
+    vertical-align: middle;
+    width: 65%;
+    margin-left: 10px;
+    background-color: transparent;
+}
+/*订单样式*/
+.orderType li{
+    list-style-type: none;
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: large;
+}
+.orderType li>a{
+    text-decoration: none;
+}
+#updateShop{
+    float:right;
+    font-size:16px;
+    margin-right: 120px;
+    margin-bottom: -20px;
+}

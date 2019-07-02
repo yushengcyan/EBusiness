@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.UserMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.UserMessage" >
+    <result column="message_id" property="messageId" jdbcType="INTEGER" />
+    <result column="messaging_user_account" property="messagingUserAccount" jdbcType="VARCHAR" />
+    <result column="messaged_user_account" property="messagedUserAccount" jdbcType="VARCHAR" />
+    <result column="message_status" property="messageStatus" jdbcType="INTEGER" />
+    <result column="message_send_time" property="messageSendTime" jdbcType="TIMESTAMP" />
+    <result column="message_content" property="messageContent" jdbcType="VARCHAR" />
+    <result column="message_ext" property="messageExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    message_id, messaging_user_account, messaged_user_account, message_status, message_send_time, 
+    message_content, message_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.UserMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.UserMessageExample" >
+    delete from user_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.UserMessage" >
+    insert into user_message (message_id, messaging_user_account, 
+      messaged_user_account, message_status, message_send_time, 
+      message_content, message_ext)
+    values (#{messageId,jdbcType=INTEGER}, #{messagingUserAccount,jdbcType=VARCHAR}, 
+      #{messagedUserAccount,jdbcType=VARCHAR}, #{messageStatus,jdbcType=INTEGER}, #{messageSendTime,jdbcType=TIMESTAMP}, 
+      #{messageContent,jdbcType=VARCHAR}, #{messageExt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.UserMessage" >
+    insert into user_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="messagingUserAccount != null" >
+        messaging_user_account,
+      </if>
+      <if test="messagedUserAccount != null" >
+        messaged_user_account,
+      </if>
+      <if test="messageStatus != null" >
+        message_status,
+      </if>
+      <if test="messageSendTime != null" >
+        message_send_time,
+      </if>
+      <if test="messageContent != null" >
+        message_content,
+      </if>
+      <if test="messageExt != null" >
+        message_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="messagingUserAccount != null" >
+        #{messagingUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="messagedUserAccount != null" >
+        #{messagedUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="messageStatus != null" >
+        #{messageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="messageSendTime != null" >
+        #{messageSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageContent != null" >
+        #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="messageExt != null" >
+        #{messageExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.UserMessageExample" resultType="java.lang.Integer" >
+    select count(*) from user_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_message
+    <set >
+      <if test="record.messageId != null" >
+        message_id = #{record.messageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.messagingUserAccount != null" >
+        messaging_user_account = #{record.messagingUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messagedUserAccount != null" >
+        messaged_user_account = #{record.messagedUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageStatus != null" >
+        message_status = #{record.messageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.messageSendTime != null" >
+        message_send_time = #{record.messageSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.messageContent != null" >
+        message_content = #{record.messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageExt != null" >
+        message_ext = #{record.messageExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_message
+    set message_id = #{record.messageId,jdbcType=INTEGER},
+      messaging_user_account = #{record.messagingUserAccount,jdbcType=VARCHAR},
+      messaged_user_account = #{record.messagedUserAccount,jdbcType=VARCHAR},
+      message_status = #{record.messageStatus,jdbcType=INTEGER},
+      message_send_time = #{record.messageSendTime,jdbcType=TIMESTAMP},
+      message_content = #{record.messageContent,jdbcType=VARCHAR},
+      message_ext = #{record.messageExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

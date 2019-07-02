@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <!-- 自适应屏幕分辨率-->
+    <meta name="viewport" content="width=device-width,inital-scale=1">
+
+    <link rel="stylesheet" href="../../css/util/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/module/frontSite/ConfirmOrder.css">
+    <link rel="stylesheet" href="../../css/module/frontSite/HomePage.css">
+    <link rel="stylesheet" href="../../css/util/footDiv.css">
+    <!-- 确认订单（购买商品时用）-->
+    <title>ConfirmOrder</title>
+</head>
+<body>
+    <div class="container">
+    <!-- 导航栏-->
+        <nav class="navbar navbar-default row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="navbar-header navdiv">
+                    <a href="#" class="navbar-brand"> 图标</a>
+                </div>
+                <div class="navbar-left" style="margin-top: 10px">
+                    <ul class="nav nav-pills">
+                        <li class="active navulli"><a href="#" id="homePage">首页</a></li>
+                        <li class="navulli"><a href="#" id="communityCenter">精选社区</a></li>
+                        <li class="navulli dropdown" style="margin-left: 15px">
+                            <a href="#" id="shopCenter" class="dropdown-toggle" data-toggle="dropdown">
+                                商家中心<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">申请开店</a></li>
+                                <!--分割符-->
+                                <li class="divider"></li>
+                                <li><a href="">已有店铺</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar navbar-left navdiv">
+                    <ul class="nav nav-pills">
+                        <li class="navulli">
+                            <a href="" id="userCenter">个人中心</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--搜索框-->
+                <div class="navbar-left" style="margin-top: 10px">
+                    <form class="navbar-form " role="search">
+                        <div class="input-group">
+                            <input type="text" id="searchContent" placeholder="请输入搜索内容"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="searchPro" type="button" style="height: 26px;">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true" style=""></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="navbar navbar-right" style="margin-top: 10px">
+                    <ul class="nav nav-pills">
+                        <li class="navulli">
+                            <a href="logIn.html" id=""><span class="glyphicon glyphicon-user"></span>登录</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--修改地址弹窗-->
+        <div class="container edit" id="editAddressshow" style="display: none;">
+            <div>
+                <h4>编辑收货地址</h4>
+            </div>
+            <div class="edit-item">
+                <label for="">收货地址：</label>
+                <input type="text">
+            </div>
+            <div class="edit-item">
+                <label for="">收件人姓名：</label>
+                <input type="text">
+            </div>
+            <div class="edit-item">
+                <label for="">电话号码：</label>
+                <input type="text">
+            </div>
+            <div class="edit-item">
+                <label for="">地址排序：</label>
+                <input type="text">
+            </div>
+            <div class="edit-item">
+                <button class="btn btn-info" style="margin-left: 200px">保存</button>
+                <button class="btn btn-warning cancel" style="margin-left: 40px">取消</button>
+            </div>
+        </div>
+        <script id="editAddressTmp" type="text/x-jsrender">
+            <div>
+                <h4>编辑收货地址</h4>
+            </div>
+            <div class="edit-item">
+                <label for="">收货地址：</label>
+                <input type="text" id="editUserAddress" value="{{:userAddress}}">
+            </div>
+            <div class="edit-item">
+                <label for="">收件人姓名：</label>
+                <input type="text" id="editName" value="{{:userName}}">
+            </div>
+            <div class="edit-item">
+                <label for="">电话号码：</label>
+                <input type="text" id="editPhone" value="{{:userPhone}}">
+            </div>
+            <div class="edit-item">
+                <button class="btn btn-info" id="saveEdit" addressId={{:userAddressId}} style="margin-left: 200px">保存</button>
+                <button class="btn btn-warning cancel" style="margin-left: 40px">取消</button>
+            </div>
+        </script>
+        <!--新增地址弹窗-->
+        <div id="addAddress" class="container edit" style="display: none;">
+            <div>
+                <h4>新增收货地址</h4>
+            </div>
+            <div class="edit-item">
+                <label for="">收货地址：</label>
+                <input type="text" id="addUserAddress" value="" placeholder="请输入收货地址" required>
+            </div>
+            <div class="edit-item">
+                <label for="">收件人姓名：</label>
+                <input type="text" id="addName" value="" placeholder="请输入收件人姓名" required>
+            </div>
+            <div class="edit-item">
+                <label for="">电话号码：</label>
+                <input type="text" id="addPhone" value="" placeholder="请输入收件人联系方式" required>
+            </div>
+            <!--<div class="edit-item">-->
+                <!--<label for="">地址排序：</label>-->
+                <!--<input type="text" value="{{:}}">-->
+            <!--</div>-->
+            <div class="edit-item">
+                <button class="btn btn-info" id="saveAdd" style="margin-left: 200px">保存</button>
+                <button class="btn btn-warning cancel" style="margin-left: 40px">取消</button>
+            </div>
+        </div>
+        <!--进度条-->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-4">
+                <div><h4>购物进度</h4></div>
+                <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-success" role="progessbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         style="width: 25%;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--确认订单主体-->
+        <div>
+            <!--选择收货地址-->
+            <div class="row" style="background-color: #E9E9E9">
+                <div>
+                    <h4 style="margin-bottom: 0px">
+                        <span>选择收货地址</span>
+                        <span id="addAddressClick" style="">新增收货地址</span>
+                    </h4>
+                </div>
+                <!--加载地址-->
+                <div>
+                    <ul class="addressUl" id="addressInfo">
+                        <li class="addressLi">
+                            <div class="" style="background-color: #00b800;">
+                                <div>收货人</div>
+                                <div style="border-bottom: 1px red solid;width: 100%;height: 2px"></div>
+                                <div>收货人联系方式</div>
+                                <div>收货地址</div>
+                                <div><span><a href="#" class="editAddress" addressId="{{:userAddressId}}">修改</a></span></div>
+                            </div>
+                        </li>
+                        <li class="addressLi">
+                            <div class="" style="background-color: #00b800;">
+                                <div>收货人</div>
+                                <div style="border-bottom: 1px red solid;width: 100%;height: 2px"></div>
+                                <div>收货人联系方式</div>
+                                <div>收货地址</div>
+                            </div>
+                        </li>
+                        <li class="addressLi">
+                            <div class="" style="background-color: #00b800;">
+                                <div>收货人</div>
+                                <div style="border-bottom: 1px red solid;width: 100%;height: 2px"></div>
+                                <div>收货人联系方式</div>
+                                <div>收货地址</div>
+                            </div>
+                        </li>
+                        <li class="addressLi">
+                            <div class="" style="background-color: #00b800;">
+                                <div>收货人</div>
+                                <div style="border-bottom: 1px red solid;width: 100%;height: 2px"></div>
+                                <div>收货人联系方式</div>
+                                <div>收货地址</div>
+                            </div>
+                        </li>
+                        <li class="addressLi">
+                            <div class="" style="background-color: #00b800;">
+                                <div>收货人</div>
+                                <div style="border-bottom: 1px red solid;width: 100%;height: 2px"></div>
+                                <div>收货人联系方式</div>
+                                <div>收货地址</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <script id="addressInfoTmpl" type="text/x-jsrender">
+                    {{for}}
+                    <li class="addressLi">
+                        <div>
+                            <div>
+                                <span>{{:userName}}</span>
+                            </div>
+                            <div style="border-bottom: 1px red solid;width: 90%;height: 2px"></div>
+                            <div>
+                                <span>{{:userAddress}}</span>
+                            </div>
+                            <div><span>{{:userPhone}}</span></div>
+                            <div>
+                                <span>
+                                <a href="#" class="editAddress"  addressId="{{:userAddressId}}">修改</a>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    {{/for}}
+                </script>
+                </div>
+                <div></div>
+            </div>
+            <!--确认订单信息-->
+            <div class="row" style="background-color: #e0e0e0;margin-top: 20px">
+                <div><h4>确认订单信息</h4></div>
+                <div>
+                    <table style="width:100%;" class="order">
+                        <colgroup>
+                            <col width="30%">
+                            <col width="10%">
+                            <col width="18%">
+                            <col width="20%">
+                            <col width="12%">
+                        </colgroup>
+                        <thead style="font-weight: 600;font-size: 18px">
+                        <tr>
+                            <td>
+                                <div style="margin-left: 10px">店铺宝贝</div>
+                            </td>
+                            <td>
+                                <div>单价</div>
+                            </td>
+                            <td>
+                                <div>商品数量</div>
+                            </td>
+                            <td>
+                                <div>商品优惠</div>
+                            </td>
+                            <td>
+                                <div>小计</div>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody id="orderInfo" style="font-size: large">
+                        <tr>
+                            <td>
+                                <div style="margin-left: 15px;float: left">
+                                    <div>
+                                        <img id="proImg" src="" alt="" style="width: 80px;height: 80px;">
+                                        <div style="float:right;margin-left: 8px">
+                                            <span id="proName" style="padding-top: 3px;margin-bottom: 5px">商品名</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span id="proPrice">￥59.00</span></td>
+                            <td><div><span id="proNum"></span></div></td>
+                            <td><div><span id="proDiscount">暂无优惠信息</span></div></td>
+                            <td><span id="proMoney">￥59.00</span></td>
+                        </tr>
+                        </tbody>
+                        <script id="orderInfoTmpl" type="text/x-jsrender">
+                            <tr>
+                                <td>
+                                    <div>
+                                        <img src="" alt="" >
+                                        <div></div>
+                                    </div>
+                                </td>
+                                <td><span id="orderMoney"></span></td>
+                                <td><span id="orderCount"></span></td>
+                                <td><span>优惠价格</span></td>
+                                <span></span>
+                            </tr>
+                        </script>
+                    </table>
+                </div>
+            </div>
+            <!--提交订单-->
+            <div style="float: right;margin-top: 20px">
+                <div class="submitOrder">
+                    <div>
+                        <span><strong>实付款：</strong><span id="resultMoney">￥59</span></span>
+                    </div>
+                    <div>
+                        <span><strong>寄送至：</strong><span id="resultAddress">地址</span></span>
+                    </div>
+                    <div>
+                        <span><strong>收货人电话：</strong><span id="resultPhone">12345679878</span></span>
+                    </div>
+                    <div>
+                        <span><strong>收货人：</strong><span id="resultUser">zll</span></span>
+                    </div>
+                </div>
+                <button class="btn btn-info" id="submitOrder" style="float: right;margin-right: -15px;width: 120px;height: 60px;border-radius: 2px;font-size: 20px;">确认订单</button>
+            </div>
+        </div>
+    </div>
+
+<!--底部-->
+    <footer class="footer">
+    <div class="container">
+        <div class="col-md-6">
+            <h1>心晴社区分享电商平台</h1>
+            <p>我们一直致力于追求更好</p>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <h4>关于我们</h4>
+                <ul class="list-unstyled">
+                    <li>关于我们</li>
+                    <li>友情链接</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>联系方式</h4>
+                <ul class="list-unstyled">
+                    <li><a href="">电话</a></li>
+                    <li><a href="">电子邮箱</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>赞助商</h4>
+                <ul class="list-unstyled">
+                    <li><a href="">心晴</a></li>
+                    <li><a href="">6034</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="../../js/util/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../js/util/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/util/jquery/jquery.params.js"></script>
+<script type="application/javascript" src="../../js/util/require-2.3.6.js"></script>
+<script type="text/javascript" src="../../js/util/seajs/2.3.0/dist/sea.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        base:'/EBusiness/js/',
+        alias:{
+            'jquery':'util/jquery/1.9.1/jquery'
+        },
+        charset:'utf-8',
+    })
+    seajs.use(['module/front/confirmOrder'],function (confirmOrder) {
+//            homepage.Init();
+    })
+</script>
+</body>
+</html>

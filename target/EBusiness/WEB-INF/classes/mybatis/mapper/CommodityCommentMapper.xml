@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.CommodityCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.CommodityComment" >
+    <result column="commodity_comment_id" property="commodityCommentId" jdbcType="INTEGER" />
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="commodity_comment_content" property="commodityCommentContent" jdbcType="VARCHAR" />
+    <result column="commodity_comment_time" property="commodityCommentTime" jdbcType="TIMESTAMP" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="shop_account" property="shopAccount" jdbcType="VARCHAR" />
+    <result column="commodity_comment_ext" property="commodityCommentExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    commodity_comment_id, commodity_id, commodity_comment_content, commodity_comment_time, 
+    user_account, shop_account, commodity_comment_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.CommodityCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from commodity_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.CommodityCommentExample" >
+    delete from commodity_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.CommodityComment" >
+    insert into commodity_comment (commodity_comment_id, commodity_id, 
+      commodity_comment_content, commodity_comment_time, 
+      user_account, shop_account, commodity_comment_ext
+      )
+    values (#{commodityCommentId,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER}, 
+      #{commodityCommentContent,jdbcType=VARCHAR}, #{commodityCommentTime,jdbcType=TIMESTAMP}, 
+      #{userAccount,jdbcType=VARCHAR}, #{shopAccount,jdbcType=VARCHAR}, #{commodityCommentExt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.CommodityComment" >
+    insert into commodity_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityCommentId != null" >
+        commodity_comment_id,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="commodityCommentContent != null" >
+        commodity_comment_content,
+      </if>
+      <if test="commodityCommentTime != null" >
+        commodity_comment_time,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="shopAccount != null" >
+        shop_account,
+      </if>
+      <if test="commodityCommentExt != null" >
+        commodity_comment_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityCommentId != null" >
+        #{commodityCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityCommentContent != null" >
+        #{commodityCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCommentTime != null" >
+        #{commodityCommentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAccount != null" >
+        #{shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCommentExt != null" >
+        #{commodityCommentExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.CommodityCommentExample" resultType="java.lang.Integer" >
+    select count(*) from commodity_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update commodity_comment
+    <set >
+      <if test="record.commodityCommentId != null" >
+        commodity_comment_id = #{record.commodityCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityId != null" >
+        commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityCommentContent != null" >
+        commodity_comment_content = #{record.commodityCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityCommentTime != null" >
+        commodity_comment_time = #{record.commodityCommentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopAccount != null" >
+        shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityCommentExt != null" >
+        commodity_comment_ext = #{record.commodityCommentExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update commodity_comment
+    set commodity_comment_id = #{record.commodityCommentId,jdbcType=INTEGER},
+      commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      commodity_comment_content = #{record.commodityCommentContent,jdbcType=VARCHAR},
+      commodity_comment_time = #{record.commodityCommentTime,jdbcType=TIMESTAMP},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      commodity_comment_ext = #{record.commodityCommentExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.CommodityTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.CommodityType" >
+    <result column="commodity_type_id" property="commodityTypeId" jdbcType="INTEGER" />
+    <result column="commodity_type_name" property="commodityTypeName" jdbcType="VARCHAR" />
+    <result column="commodity_type_desc" property="commodityTypeDesc" jdbcType="VARCHAR" />
+    <result column="commodity_type_ext" property="commodityTypeExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    commodity_type_id, commodity_type_name, commodity_type_desc, commodity_type_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.CommodityTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from commodity_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.CommodityTypeExample" >
+    delete from commodity_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.CommodityType" >
+    insert into commodity_type (commodity_type_id, commodity_type_name, 
+      commodity_type_desc, commodity_type_ext)
+    values (#{commodityTypeId,jdbcType=INTEGER}, #{commodityTypeName,jdbcType=VARCHAR}, 
+      #{commodityTypeDesc,jdbcType=VARCHAR}, #{commodityTypeExt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.CommodityType" >
+    insert into commodity_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityTypeId != null" >
+        commodity_type_id,
+      </if>
+      <if test="commodityTypeName != null" >
+        commodity_type_name,
+      </if>
+      <if test="commodityTypeDesc != null" >
+        commodity_type_desc,
+      </if>
+      <if test="commodityTypeExt != null" >
+        commodity_type_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityTypeId != null" >
+        #{commodityTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityTypeName != null" >
+        #{commodityTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTypeDesc != null" >
+        #{commodityTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTypeExt != null" >
+        #{commodityTypeExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.CommodityTypeExample" resultType="java.lang.Integer" >
+    select count(*) from commodity_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update commodity_type
+    <set >
+      <if test="record.commodityTypeId != null" >
+        commodity_type_id = #{record.commodityTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityTypeName != null" >
+        commodity_type_name = #{record.commodityTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityTypeDesc != null" >
+        commodity_type_desc = #{record.commodityTypeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityTypeExt != null" >
+        commodity_type_ext = #{record.commodityTypeExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update commodity_type
+    set commodity_type_id = #{record.commodityTypeId,jdbcType=INTEGER},
+      commodity_type_name = #{record.commodityTypeName,jdbcType=VARCHAR},
+      commodity_type_desc = #{record.commodityTypeDesc,jdbcType=VARCHAR},
+      commodity_type_ext = #{record.commodityTypeExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

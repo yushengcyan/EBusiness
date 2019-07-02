@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-COMPATIBLE" content="ie=edge">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="../../css/module/backStage/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../fonts/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../css/module/backStage/backStagestyles.css">
+
+</head>
+<body class="sidebar-fixed header-fixed">
+<div class="page-wrapper">
+    <nav class="navbar page-header">
+        <a href="#" class="btn btn-link sidebar-mobile-toggle d-md-none mr-auto">
+            <i class="fa fa-bars"></i>
+        </a>
+
+        <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+            <i class="fa fa-bars"></i>
+        </a>
+
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="../../images/background/avatar-1.png" class="avatar avatar-sm" alt="logo">
+                    <span class="small ml-1 d-md-down-none">管理员</span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header">用户名</div>
+
+                    <a href="#" class="dropdown-item">
+                        <i class="fa fa-user"></i> 用户信息
+                    </a>
+
+
+                    <a href="backLogIn.html" class="dropdown-item">
+                        <i class="fa fa-lock"></i> 退出
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <li class="nav-title">常用</li>
+
+                    <li class="nav-item">
+                        <a href="backStage.html" class="nav-link active">
+                            <i class="icon icon-speedometer"></i> 首页
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="UserManage.html" class="nav-link">
+                            <i class="icon icon-speedometer"></i> 用户管理 <i ></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="Community.html" class="nav-link">
+                            <i class="icon icon-speedometer"></i> 社区管理 <i ></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="Manager.html" class="nav-link">
+                            <i class="icon icon-puzzle"></i> 管理员管理
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="ShopMallManage.html" class="nav-link">
+                            <i class="icon icon-grid"></i> 商城管理
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card p-4">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h4 d-block font-weight-normal mb-2" id="userCount">0</span>
+                                    <span class="font-weight-light">用户数</span>
+                                </div>
+
+                                <div class="h2 text-muted">
+                                    <i class="icon icon-people"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card p-4">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h4 d-block font-weight-normal mb-2" id="tradeMoney">$0</span>
+                                    <span class="font-weight-light">交易额</span>
+                                </div>
+
+                                <div class="h2 text-muted">
+                                    <i class="icon icon-wallet"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card p-4">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h4 d-block font-weight-normal mb-2" id="tradeCount">0</span>
+                                    <span class="font-weight-light">交易数量</span>
+                                </div>
+
+                                <div class="h2 text-muted">
+                                    <i class="icon icon-cloud-download"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card p-4">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span id="articleCount" class="h4 d-block font-weight-normal mb-2">0</span>
+                                    <span class="font-weight-light">社区文章数</span>
+                                </div>
+
+                                <div class="h2 text-muted">
+                                    <i class="icon icon-clock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                总用户
+                            </div>
+
+                            <div class="card-body p-0">
+                                <div class="p-4">
+                                    <canvas id="line-chart" width="100%" height="20"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script src="../../js/module/backStage/backStageTest.js"></script>-->
+<script src="../../js/util/jquery-i18n/jquery/jquery.min.js"></script>
+<script src="../../js/util/popper.js/popper.min.js"></script>
+<script src="../../js/util/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../js/util/chart.js/chart.min.js"></script>
+<script src="../../js/module/backStage/carbon.js"></script>
+<script src="../../js/module/backStage/demo.js"></script>
+<script type="text/javascript" src="../../js/util/seajs/2.3.0/dist/sea.js"></script>
+<script type="text/javascript" src="../../js/util/config.js"></script>
+<script type="text/javascript">
+
+    seajs.config({
+        //配置基础路径
+        base:'/EBusiness/js/',
+        //配置别名（用一个变量名来表示文件，可以解决文件路径过深的问题，实现了路径映射）
+        alias:{
+            'jquery':'util/jquery/1.9.1/jquery',
+//            'jquery':'util/jquery-i18n/jquery/jquery',
+        },
+        //也可以用实际路径
+        paths:{
+            'js':'http://localhost:8085/EBusiness/js/'
+        },
+        charset:'utf-8',
+    })
+    seajs.use(['module/backStage/backStage'],function (backStagePage) {
+        backStagePage.getUserCount();
+        backStagePage.getTradeCount();
+        backStagePage.getTradeMoney();
+        backStagePage.getPostCount();
+//        backStagePage.backStage();
+
+    })
+</script>
+</body>
+</html>

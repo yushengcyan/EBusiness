@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.UserBaseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.UserBaseInfo" >
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="user_phone_num" property="userPhoneNum" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_sexy" property="userSexy" jdbcType="CHAR" />
+    <result column="user_birthday" property="userBirthday" jdbcType="DATE" />
+    <result column="user_account_status" property="userAccountStatus" jdbcType="CHAR" />
+    <result column="user_integral" property="userIntegral" jdbcType="INTEGER" />
+    <result column="user_register_time" property="userRegisterTime" jdbcType="TIMESTAMP" />
+    <result column="user_info_ext1" property="userInfoExt1" jdbcType="VARCHAR" />
+    <result column="user_info_ext2" property="userInfoExt2" jdbcType="VARCHAR" />
+    <result column="user_level_id" property="userLevelId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_account, user_phone_num, user_password, user_name, user_email, user_sexy, 
+    user_birthday, user_account_status, user_integral, user_register_time, user_info_ext1, 
+    user_info_ext2, user_level_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.UserBaseInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.UserBaseInfoExample" >
+    delete from user_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.UserBaseInfo" >
+    insert into user_base_info (user_id, user_account, user_phone_num, 
+      user_password, user_name, user_email, 
+      user_sexy, user_birthday, user_account_status, 
+      user_integral, user_register_time, user_info_ext1, 
+      user_info_ext2, user_level_id)
+    values (#{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{userPhoneNum,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userSexy,jdbcType=CHAR}, #{userBirthday,jdbcType=DATE}, #{userAccountStatus,jdbcType=CHAR}, 
+      #{userIntegral,jdbcType=INTEGER}, #{userRegisterTime,jdbcType=TIMESTAMP}, #{userInfoExt1,jdbcType=VARCHAR}, 
+      #{userInfoExt2,jdbcType=VARCHAR}, #{userLevelId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.UserBaseInfo" >
+    insert into user_base_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="userPhoneNum != null" >
+        user_phone_num,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userSexy != null" >
+        user_sexy,
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday,
+      </if>
+      <if test="userAccountStatus != null" >
+        user_account_status,
+      </if>
+      <if test="userIntegral != null" >
+        user_integral,
+      </if>
+      <if test="userRegisterTime != null" >
+        user_register_time,
+      </if>
+      <if test="userInfoExt1 != null" >
+        user_info_ext1,
+      </if>
+      <if test="userInfoExt2 != null" >
+        user_info_ext2,
+      </if>
+      <if test="userLevelId != null" >
+        user_level_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoneNum != null" >
+        #{userPhoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSexy != null" >
+        #{userSexy,jdbcType=CHAR},
+      </if>
+      <if test="userBirthday != null" >
+        #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userAccountStatus != null" >
+        #{userAccountStatus,jdbcType=CHAR},
+      </if>
+      <if test="userIntegral != null" >
+        #{userIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="userRegisterTime != null" >
+        #{userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userInfoExt1 != null" >
+        #{userInfoExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="userInfoExt2 != null" >
+        #{userInfoExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevelId != null" >
+        #{userLevelId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.UserBaseInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_base_info
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhoneNum != null" >
+        user_phone_num = #{record.userPhoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSexy != null" >
+        user_sexy = #{record.userSexy,jdbcType=CHAR},
+      </if>
+      <if test="record.userBirthday != null" >
+        user_birthday = #{record.userBirthday,jdbcType=DATE},
+      </if>
+      <if test="record.userAccountStatus != null" >
+        user_account_status = #{record.userAccountStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.userIntegral != null" >
+        user_integral = #{record.userIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.userRegisterTime != null" >
+        user_register_time = #{record.userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userInfoExt1 != null" >
+        user_info_ext1 = #{record.userInfoExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userInfoExt2 != null" >
+        user_info_ext2 = #{record.userInfoExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLevelId != null" >
+        user_level_id = #{record.userLevelId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_base_info
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      user_phone_num = #{record.userPhoneNum,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_sexy = #{record.userSexy,jdbcType=CHAR},
+      user_birthday = #{record.userBirthday,jdbcType=DATE},
+      user_account_status = #{record.userAccountStatus,jdbcType=CHAR},
+      user_integral = #{record.userIntegral,jdbcType=INTEGER},
+      user_register_time = #{record.userRegisterTime,jdbcType=TIMESTAMP},
+      user_info_ext1 = #{record.userInfoExt1,jdbcType=VARCHAR},
+      user_info_ext2 = #{record.userInfoExt2,jdbcType=VARCHAR},
+      user_level_id = #{record.userLevelId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

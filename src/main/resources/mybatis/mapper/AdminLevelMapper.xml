@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.AdminLevelMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.AdminLevel" >
+    <result column="admin_level_id" property="adminLevelId" jdbcType="INTEGER" />
+    <result column="admin_level_role" property="adminLevelRole" jdbcType="VARCHAR" />
+    <result column="admin_level_desc" property="adminLevelDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    admin_level_id, admin_level_role, admin_level_desc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.AdminLevelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from admin_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.AdminLevelExample" >
+    delete from admin_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.AdminLevel" >
+    insert into admin_level (admin_level_id, admin_level_role, admin_level_desc
+      )
+    values (#{adminLevelId,jdbcType=INTEGER}, #{adminLevelRole,jdbcType=VARCHAR}, #{adminLevelDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.AdminLevel" >
+    insert into admin_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminLevelId != null" >
+        admin_level_id,
+      </if>
+      <if test="adminLevelRole != null" >
+        admin_level_role,
+      </if>
+      <if test="adminLevelDesc != null" >
+        admin_level_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminLevelId != null" >
+        #{adminLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="adminLevelRole != null" >
+        #{adminLevelRole,jdbcType=VARCHAR},
+      </if>
+      <if test="adminLevelDesc != null" >
+        #{adminLevelDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.AdminLevelExample" resultType="java.lang.Integer" >
+    select count(*) from admin_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admin_level
+    <set >
+      <if test="record.adminLevelId != null" >
+        admin_level_id = #{record.adminLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminLevelRole != null" >
+        admin_level_role = #{record.adminLevelRole,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminLevelDesc != null" >
+        admin_level_desc = #{record.adminLevelDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admin_level
+    set admin_level_id = #{record.adminLevelId,jdbcType=INTEGER},
+      admin_level_role = #{record.adminLevelRole,jdbcType=VARCHAR},
+      admin_level_desc = #{record.adminLevelDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

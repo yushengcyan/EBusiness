@@ -1,0 +1,26 @@
+
+€javascript:S2703"aAdd the "let", "const" or "var" keyword to this declaration of "getUrlParam" to make it explicit.(—Ô¢Ëıÿÿÿÿ
+…javascript:S2703"fAdd the "let", "const" or "var" keyword to this declaration of "getQueryVariable" to make it explicit.(ë¶ö•ıÿÿÿÿ
+xjavascript:S2703"^Add the "let", "const" or "var" keyword to this declaration of "addOrder" to make it explicit.(…’å¹
+?javascript:S1442" Remove this usage of alert(...).(³âêŞüÿÿÿÿ
+fjavascript:S2589"LRefactor this code so that this expression does not always evaluate to true.(ôÅ—¼
+zjavascript:S2703"`Add the "let", "const" or "var" keyword to this declaration of "getProduct" to make it explicit.(½úİÚ
+zjavascript:S2703"`Add the "let", "const" or "var" keyword to this declaration of "getAddress" to make it explicit.(•—»Í
+~javascript:S2703"dAdd the "let", "const" or "var" keyword to this declaration of "getEditAddress" to make it explicit.(šªë¨
+?javascript:S1442" Remove this usage of alert(...).(³âêŞüÿÿÿÿ
+:javascript:S1442" Remove this usage of alert(...).(ÿÕ—
+}javascript:S2703"^Add the "let", "const" or "var" keyword to this declaration of "judgeLog" to make it explicit.(©†ƒÀıÿÿÿÿ
+ijavascript:S3699"JRemove this use of the output from "Init"; "Init" doesn't return anything.(äş£äúÿÿÿÿ
+?javascript:S1442" Remove this usage of alert(...).(³âêŞüÿÿÿÿ
+?javascript:S1442" Remove this usage of alert(...).(³âêŞüÿÿÿÿ
+?javascript:S1442" Remove this usage of alert(...).(³âêŞüÿÿÿÿ
+zjavascript:S2703"`Add the "let", "const" or "var" keyword to this declaration of "addAddress" to make it explicit.(º¼À³
+ujavascript:S2703"[Add the "let", "const" or "var" keyword to this declaration of "param" to make it explicit.(ô¾è¹
+:javascript:S1442" Remove this usage of alert(...).(«ÁÎ‘
+ejavascript:S2589"LRefactor this code so that this expression does not always evaluate to true.(¨£‡f
+}javascript:S2703"^Add the "let", "const" or "var" keyword to this declaration of "proParam" to make it explicit.(´»İşÿÿÿÿ
+?javascript:S1442" Remove this usage of alert(...).(³âêŞüÿÿÿÿ
+?javascript:S1442" Remove this usage of alert(...).(³âêŞüÿÿÿÿ
+Tjavascript:S1854":Remove this useless assignment to local variable "ajaxUrl"(İÇà
+€javascript:S2703"aAdd the "let", "const" or "var" keyword to this declaration of "editAddress" to make it explicit.(¨ŒÂÓùÿÿÿÿ
+[javascript:UnusedVariable"8Remove the declaration of the unused 'ajaxUrl' variable.(İÇà

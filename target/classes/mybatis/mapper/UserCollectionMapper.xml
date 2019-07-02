@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.UserCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.UserCollection" >
+    <result column="collection_id" property="collectionId" jdbcType="INTEGER" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="collected_accout" property="collectedAccout" jdbcType="VARCHAR" />
+    <result column="collection_status" property="collectionStatus" jdbcType="INTEGER" />
+    <result column="collection_type" property="collectionType" jdbcType="INTEGER" />
+    <result column="collection_order" property="collectionOrder" jdbcType="INTEGER" />
+    <result column="collection_time" property="collectionTime" jdbcType="TIMESTAMP" />
+    <result column="collection_remark" property="collectionRemark" jdbcType="VARCHAR" />
+    <result column="collection_last_time" property="collectionLastTime" jdbcType="TIMESTAMP" />
+    <result column="collection_ext" property="collectionExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    collection_id, user_account, collected_accout, collection_status, collection_type, 
+    collection_order, collection_time, collection_remark, collection_last_time, collection_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.UserCollectionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_collection
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.UserCollectionExample" >
+    delete from user_collection
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.UserCollection" >
+    insert into user_collection (collection_id, user_account, collected_accout, 
+      collection_status, collection_type, collection_order, 
+      collection_time, collection_remark, collection_last_time, 
+      collection_ext)
+    values (#{collectionId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{collectedAccout,jdbcType=VARCHAR}, 
+      #{collectionStatus,jdbcType=INTEGER}, #{collectionType,jdbcType=INTEGER}, #{collectionOrder,jdbcType=INTEGER}, 
+      #{collectionTime,jdbcType=TIMESTAMP}, #{collectionRemark,jdbcType=VARCHAR}, #{collectionLastTime,jdbcType=TIMESTAMP}, 
+      #{collectionExt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.UserCollection" >
+    insert into user_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        collection_id,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="collectedAccout != null" >
+        collected_accout,
+      </if>
+      <if test="collectionStatus != null" >
+        collection_status,
+      </if>
+      <if test="collectionType != null" >
+        collection_type,
+      </if>
+      <if test="collectionOrder != null" >
+        collection_order,
+      </if>
+      <if test="collectionTime != null" >
+        collection_time,
+      </if>
+      <if test="collectionRemark != null" >
+        collection_remark,
+      </if>
+      <if test="collectionLastTime != null" >
+        collection_last_time,
+      </if>
+      <if test="collectionExt != null" >
+        collection_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        #{collectionId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="collectedAccout != null" >
+        #{collectedAccout,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionStatus != null" >
+        #{collectionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="collectionType != null" >
+        #{collectionType,jdbcType=INTEGER},
+      </if>
+      <if test="collectionOrder != null" >
+        #{collectionOrder,jdbcType=INTEGER},
+      </if>
+      <if test="collectionTime != null" >
+        #{collectionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectionRemark != null" >
+        #{collectionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionLastTime != null" >
+        #{collectionLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectionExt != null" >
+        #{collectionExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.UserCollectionExample" resultType="java.lang.Integer" >
+    select count(*) from user_collection
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_collection
+    <set >
+      <if test="record.collectionId != null" >
+        collection_id = #{record.collectionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectedAccout != null" >
+        collected_accout = #{record.collectedAccout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectionStatus != null" >
+        collection_status = #{record.collectionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectionType != null" >
+        collection_type = #{record.collectionType,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectionOrder != null" >
+        collection_order = #{record.collectionOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectionTime != null" >
+        collection_time = #{record.collectionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.collectionRemark != null" >
+        collection_remark = #{record.collectionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectionLastTime != null" >
+        collection_last_time = #{record.collectionLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.collectionExt != null" >
+        collection_ext = #{record.collectionExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_collection
+    set collection_id = #{record.collectionId,jdbcType=INTEGER},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      collected_accout = #{record.collectedAccout,jdbcType=VARCHAR},
+      collection_status = #{record.collectionStatus,jdbcType=INTEGER},
+      collection_type = #{record.collectionType,jdbcType=INTEGER},
+      collection_order = #{record.collectionOrder,jdbcType=INTEGER},
+      collection_time = #{record.collectionTime,jdbcType=TIMESTAMP},
+      collection_remark = #{record.collectionRemark,jdbcType=VARCHAR},
+      collection_last_time = #{record.collectionLastTime,jdbcType=TIMESTAMP},
+      collection_ext = #{record.collectionExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

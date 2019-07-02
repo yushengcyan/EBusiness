@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.AdminInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.AdminInfo" >
+    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="admin_account" property="adminAccount" jdbcType="VARCHAR" />
+    <result column="admin_password" property="adminPassword" jdbcType="VARCHAR" />
+    <result column="admin_level" property="adminLevel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    admin_id, admin_account, admin_password, admin_level
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.AdminInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from admin_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.AdminInfoExample" >
+    delete from admin_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.AdminInfo" >
+    insert into admin_info (admin_id, admin_account, admin_password, 
+      admin_level)
+    values (#{adminId,jdbcType=INTEGER}, #{adminAccount,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, 
+      #{adminLevel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.AdminInfo" >
+    insert into admin_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="adminAccount != null" >
+        admin_account,
+      </if>
+      <if test="adminPassword != null" >
+        admin_password,
+      </if>
+      <if test="adminLevel != null" >
+        admin_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="adminAccount != null" >
+        #{adminAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null" >
+        #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminLevel != null" >
+        #{adminLevel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.AdminInfoExample" resultType="java.lang.Integer" >
+    select count(*) from admin_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admin_info
+    <set >
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminAccount != null" >
+        admin_account = #{record.adminAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPassword != null" >
+        admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminLevel != null" >
+        admin_level = #{record.adminLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admin_info
+    set admin_id = #{record.adminId,jdbcType=INTEGER},
+      admin_account = #{record.adminAccount,jdbcType=VARCHAR},
+      admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      admin_level = #{record.adminLevel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <!--<select id="LogOn" parameterType="" resultType="java.lang.Integer">-->
+    <!--SELECT * from admin_info a where a.admin_account=#{} and a.admin_password=#{}-->
+  <!--</select>-->
+</mapper>

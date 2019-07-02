@@ -1,0 +1,93 @@
+/*社区文章*/
+.article{
+    margin-left: -80px;
+}
+.article li{
+    list-style-type: none;
+    border: 1px solid gainsboro;
+    width: 220px;
+    height: 140px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    float: left;
+    cursor: pointer;
+}
+.article li>div{
+    width: 100%;
+    margin-bottom: 3px;
+}
+.articleContent{
+    /*超过四行后就用省略号显示（此处的四行后若div够大让然会显示，只是在第四行会省略显示）*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-wrap:break-word;
+    /*设置文字行间距*/
+    line-height: 20px;
+    /*设置首行缩进*/
+    text-indent: 20px;
+    /*设置文字间距*/
+    letter-spacing: 0.3rem;
+}
+/*点赞、评论样式*/
+.likeUp,.comment{
+    width: 50%;
+    float: left;
+}
+.likeUp>span{
+    font-size: large;
+}
+
+.comment>span{
+    font-size: large;
+}
+/*评论弹窗*/
+#commentFloat{
+    display: none;
+    width: 200px;
+    height: 140px;
+    position: absolute;
+    z-index: 1000;
+    border: solid 1px;
+}
+#commentcontent{
+    width: 100%;
+    height: 75%;
+    overflow-y: scroll;
+}
+
+/*发布文章框样式*/
+/*发布文章弹窗*/
+#articleFloat{
+    width: 600px;
+    height: 480px;
+    background-color: #e2e6ea;
+    position: fixed;
+    top: 50%;left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 10000;
+}
+#articleFloat>div{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: 10px;
+}
+#articleFloat>div>input{
+    width: 100%;
+    height: 30px;
+}
+#articleFloat>div>select{
+    width: 100%;
+    height: 30px;
+}
+#articleFloat>div>label{
+    width: 100%;
+}
+#releaseContent{
+    overflow-y: scroll;
+    width: 100%;
+    height: 100px;
+}

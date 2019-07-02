@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.UserFriendsMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.UserFriends" >
+    <result column="fridend_id" property="fridendId" jdbcType="INTEGER" />
+    <result column="friending_user_account" property="friendingUserAccount" jdbcType="VARCHAR" />
+    <result column="friending_user_name" property="friendingUserName" jdbcType="VARCHAR" />
+    <result column="friended_user_account" property="friendedUserAccount" jdbcType="VARCHAR" />
+    <result column="friended_user_name" property="friendedUserName" jdbcType="VARCHAR" />
+    <result column="friend_nickname" property="friendNickname" jdbcType="VARCHAR" />
+    <result column="friend_status" property="friendStatus" jdbcType="INTEGER" />
+    <result column="friend_time" property="friendTime" jdbcType="TIMESTAMP" />
+    <result column="friend_last_time" property="friendLastTime" jdbcType="TIMESTAMP" />
+    <result column="friend_ext" property="friendExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fridend_id, friending_user_account, friending_user_name, friended_user_account, friended_user_name, 
+    friend_nickname, friend_status, friend_time, friend_last_time, friend_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.UserFriendsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_friends
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.UserFriendsExample" >
+    delete from user_friends
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.UserFriends" >
+    insert into user_friends (fridend_id, friending_user_account, 
+      friending_user_name, friended_user_account, 
+      friended_user_name, friend_nickname, friend_status, 
+      friend_time, friend_last_time, friend_ext
+      )
+    values (#{fridendId,jdbcType=INTEGER}, #{friendingUserAccount,jdbcType=VARCHAR}, 
+      #{friendingUserName,jdbcType=VARCHAR}, #{friendedUserAccount,jdbcType=VARCHAR}, 
+      #{friendedUserName,jdbcType=VARCHAR}, #{friendNickname,jdbcType=VARCHAR}, #{friendStatus,jdbcType=INTEGER}, 
+      #{friendTime,jdbcType=TIMESTAMP}, #{friendLastTime,jdbcType=TIMESTAMP}, #{friendExt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.UserFriends" >
+    insert into user_friends
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fridendId != null" >
+        fridend_id,
+      </if>
+      <if test="friendingUserAccount != null" >
+        friending_user_account,
+      </if>
+      <if test="friendingUserName != null" >
+        friending_user_name,
+      </if>
+      <if test="friendedUserAccount != null" >
+        friended_user_account,
+      </if>
+      <if test="friendedUserName != null" >
+        friended_user_name,
+      </if>
+      <if test="friendNickname != null" >
+        friend_nickname,
+      </if>
+      <if test="friendStatus != null" >
+        friend_status,
+      </if>
+      <if test="friendTime != null" >
+        friend_time,
+      </if>
+      <if test="friendLastTime != null" >
+        friend_last_time,
+      </if>
+      <if test="friendExt != null" >
+        friend_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fridendId != null" >
+        #{fridendId,jdbcType=INTEGER},
+      </if>
+      <if test="friendingUserAccount != null" >
+        #{friendingUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="friendingUserName != null" >
+        #{friendingUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="friendedUserAccount != null" >
+        #{friendedUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="friendedUserName != null" >
+        #{friendedUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="friendNickname != null" >
+        #{friendNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="friendStatus != null" >
+        #{friendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="friendTime != null" >
+        #{friendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="friendLastTime != null" >
+        #{friendLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="friendExt != null" >
+        #{friendExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.UserFriendsExample" resultType="java.lang.Integer" >
+    select count(*) from user_friends
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_friends
+    <set >
+      <if test="record.fridendId != null" >
+        fridend_id = #{record.fridendId,jdbcType=INTEGER},
+      </if>
+      <if test="record.friendingUserAccount != null" >
+        friending_user_account = #{record.friendingUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendingUserName != null" >
+        friending_user_name = #{record.friendingUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendedUserAccount != null" >
+        friended_user_account = #{record.friendedUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendedUserName != null" >
+        friended_user_name = #{record.friendedUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendNickname != null" >
+        friend_nickname = #{record.friendNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendStatus != null" >
+        friend_status = #{record.friendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.friendTime != null" >
+        friend_time = #{record.friendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.friendLastTime != null" >
+        friend_last_time = #{record.friendLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.friendExt != null" >
+        friend_ext = #{record.friendExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_friends
+    set fridend_id = #{record.fridendId,jdbcType=INTEGER},
+      friending_user_account = #{record.friendingUserAccount,jdbcType=VARCHAR},
+      friending_user_name = #{record.friendingUserName,jdbcType=VARCHAR},
+      friended_user_account = #{record.friendedUserAccount,jdbcType=VARCHAR},
+      friended_user_name = #{record.friendedUserName,jdbcType=VARCHAR},
+      friend_nickname = #{record.friendNickname,jdbcType=VARCHAR},
+      friend_status = #{record.friendStatus,jdbcType=INTEGER},
+      friend_time = #{record.friendTime,jdbcType=TIMESTAMP},
+      friend_last_time = #{record.friendLastTime,jdbcType=TIMESTAMP},
+      friend_ext = #{record.friendExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

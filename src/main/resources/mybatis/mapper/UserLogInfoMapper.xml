@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.UserLogInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.UserLogInfo" >
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="user_phone_num" property="userPhoneNum" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_account, user_phone_num, user_password, user_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.UserLogInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_log_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.UserLogInfoExample" >
+    delete from user_log_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.UserLogInfo" >
+    insert into user_log_info (user_id, user_account, user_phone_num, 
+      user_password, user_status)
+    values (#{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{userPhoneNum,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.UserLogInfo" >
+    insert into user_log_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="userPhoneNum != null" >
+        user_phone_num,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoneNum != null" >
+        #{userPhoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.UserLogInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user_log_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_log_info
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhoneNum != null" >
+        user_phone_num = #{record.userPhoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStatus != null" >
+        user_status = #{record.userStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_log_info
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      user_phone_num = #{record.userPhoneNum,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

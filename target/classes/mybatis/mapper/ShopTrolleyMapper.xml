@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.ShopTrolleyMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.ShopTrolley" >
+    <result column="shop_trolley_id" property="shopTrolleyId" jdbcType="INTEGER" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="shop_account" property="shopAccount" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="commodity_num" property="commodityNum" jdbcType="INTEGER" />
+    <result column="commodity_price" property="commodityPrice" jdbcType="DECIMAL" />
+    <result column="shop_trolley_status" property="shopTrolleyStatus" jdbcType="INTEGER" />
+    <result column="shop_trolley_add_time" property="shopTrolleyAddTime" jdbcType="TIMESTAMP" />
+    <result column="shop_trolley_last_time" property="shopTrolleyLastTime" jdbcType="TIMESTAMP" />
+    <result column="shop_trolley_ext" property="shopTrolleyExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shop_trolley_id, user_account, commodity_id, commodity_name, shop_account, shop_name, 
+    commodity_num, commodity_price, shop_trolley_status, shop_trolley_add_time, shop_trolley_last_time, 
+    shop_trolley_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.ShopTrolleyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_trolley
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.ShopTrolleyExample" >
+    delete from shop_trolley
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.ShopTrolley" >
+    insert into shop_trolley (shop_trolley_id, user_account, commodity_id, 
+      commodity_name, shop_account, shop_name, 
+      commodity_num, commodity_price, shop_trolley_status, 
+      shop_trolley_add_time, shop_trolley_last_time, 
+      shop_trolley_ext)
+    values (#{shopTrolleyId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{commodityId,jdbcType=INTEGER}, 
+      #{commodityName,jdbcType=VARCHAR}, #{shopAccount,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
+      #{commodityNum,jdbcType=INTEGER}, #{commodityPrice,jdbcType=DECIMAL}, #{shopTrolleyStatus,jdbcType=INTEGER}, 
+      #{shopTrolleyAddTime,jdbcType=TIMESTAMP}, #{shopTrolleyLastTime,jdbcType=TIMESTAMP}, 
+      #{shopTrolleyExt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.ShopTrolley" >
+    insert into shop_trolley
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopTrolleyId != null" >
+        shop_trolley_id,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="shopAccount != null" >
+        shop_account,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="commodityNum != null" >
+        commodity_num,
+      </if>
+      <if test="commodityPrice != null" >
+        commodity_price,
+      </if>
+      <if test="shopTrolleyStatus != null" >
+        shop_trolley_status,
+      </if>
+      <if test="shopTrolleyAddTime != null" >
+        shop_trolley_add_time,
+      </if>
+      <if test="shopTrolleyLastTime != null" >
+        shop_trolley_last_time,
+      </if>
+      <if test="shopTrolleyExt != null" >
+        shop_trolley_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopTrolleyId != null" >
+        #{shopTrolleyId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAccount != null" >
+        #{shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityNum != null" >
+        #{commodityNum,jdbcType=INTEGER},
+      </if>
+      <if test="commodityPrice != null" >
+        #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopTrolleyStatus != null" >
+        #{shopTrolleyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shopTrolleyAddTime != null" >
+        #{shopTrolleyAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopTrolleyLastTime != null" >
+        #{shopTrolleyLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopTrolleyExt != null" >
+        #{shopTrolleyExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.ShopTrolleyExample" resultType="java.lang.Integer" >
+    select count(*) from shop_trolley
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_trolley
+    <set >
+      <if test="record.shopTrolleyId != null" >
+        shop_trolley_id = #{record.shopTrolleyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityId != null" >
+        commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityName != null" >
+        commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopAccount != null" >
+        shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopName != null" >
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityNum != null" >
+        commodity_num = #{record.commodityNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityPrice != null" >
+        commodity_price = #{record.commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopTrolleyStatus != null" >
+        shop_trolley_status = #{record.shopTrolleyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopTrolleyAddTime != null" >
+        shop_trolley_add_time = #{record.shopTrolleyAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shopTrolleyLastTime != null" >
+        shop_trolley_last_time = #{record.shopTrolleyLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shopTrolleyExt != null" >
+        shop_trolley_ext = #{record.shopTrolleyExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_trolley
+    set shop_trolley_id = #{record.shopTrolleyId,jdbcType=INTEGER},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      commodity_num = #{record.commodityNum,jdbcType=INTEGER},
+      commodity_price = #{record.commodityPrice,jdbcType=DECIMAL},
+      shop_trolley_status = #{record.shopTrolleyStatus,jdbcType=INTEGER},
+      shop_trolley_add_time = #{record.shopTrolleyAddTime,jdbcType=TIMESTAMP},
+      shop_trolley_last_time = #{record.shopTrolleyLastTime,jdbcType=TIMESTAMP},
+      shop_trolley_ext = #{record.shopTrolleyExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

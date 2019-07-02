@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.UserAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.UserAddress" >
+    <result column="user_address_id" property="userAddressId" jdbcType="INTEGER" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="user_address_status" property="userAddressStatus" jdbcType="INTEGER" />
+    <result column="user_address_order" property="userAddressOrder" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_address_id, user_account, user_name, user_phone, user_address, user_address_status, 
+    user_address_order
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.UserAddressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.UserAddressExample" >
+    delete from user_address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.UserAddress" >
+    insert into user_address (user_address_id, user_account, user_name, 
+      user_phone, user_address, user_address_status, 
+      user_address_order)
+    values (#{userAddressId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userAddressStatus,jdbcType=INTEGER}, 
+      #{userAddressOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.UserAddress" >
+    insert into user_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userAddressId != null" >
+        user_address_id,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="userAddressStatus != null" >
+        user_address_status,
+      </if>
+      <if test="userAddressOrder != null" >
+        user_address_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userAddressId != null" >
+        #{userAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddressStatus != null" >
+        #{userAddressStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userAddressOrder != null" >
+        #{userAddressOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.UserAddressExample" resultType="java.lang.Integer" >
+    select count(*) from user_address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_address
+    <set >
+      <if test="record.userAddressId != null" >
+        user_address_id = #{record.userAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null" >
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null" >
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddressStatus != null" >
+        user_address_status = #{record.userAddressStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAddressOrder != null" >
+        user_address_order = #{record.userAddressOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_address
+    set user_address_id = #{record.userAddressId,jdbcType=INTEGER},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_address = #{record.userAddress,jdbcType=VARCHAR},
+      user_address_status = #{record.userAddressStatus,jdbcType=INTEGER},
+      user_address_order = #{record.userAddressOrder,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

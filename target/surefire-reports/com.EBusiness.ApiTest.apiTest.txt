@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.EBusiness.ApiTest.apiTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 11.806 s <<< FAILURE! - in com.EBusiness.ApiTest.apiTest
+test(com.EBusiness.ApiTest.apiTest)  Time elapsed: 0.043 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.EBusiness.ApiTest.apiTest.test(apiTest.java:40)
+

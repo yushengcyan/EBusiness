@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.ShopCommodityMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.ShopCommodity" >
+    <result column="shop_commodity_id" property="shopCommodityId" jdbcType="INTEGER" />
+    <result column="shop_account" property="shopAccount" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="shop_commodity_ext1" property="shopCommodityExt1" jdbcType="VARCHAR" />
+    <result column="commodity_discount" property="commodityDiscount" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shop_commodity_id, shop_account, shop_name, commodity_id, commodity_name, shop_commodity_ext1, 
+    commodity_discount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.ShopCommodityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.ShopCommodityExample" >
+    delete from shop_commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.ShopCommodity" >
+    insert into shop_commodity (shop_commodity_id, shop_account, shop_name, 
+      commodity_id, commodity_name, shop_commodity_ext1, 
+      commodity_discount)
+    values (#{shopCommodityId,jdbcType=INTEGER}, #{shopAccount,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
+      #{commodityId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, #{shopCommodityExt1,jdbcType=VARCHAR}, 
+      #{commodityDiscount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.ShopCommodity" >
+    insert into shop_commodity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopCommodityId != null" >
+        shop_commodity_id,
+      </if>
+      <if test="shopAccount != null" >
+        shop_account,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="shopCommodityExt1 != null" >
+        shop_commodity_ext1,
+      </if>
+      <if test="commodityDiscount != null" >
+        commodity_discount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopCommodityId != null" >
+        #{shopCommodityId,jdbcType=INTEGER},
+      </if>
+      <if test="shopAccount != null" >
+        #{shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopCommodityExt1 != null" >
+        #{shopCommodityExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDiscount != null" >
+        #{commodityDiscount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.ShopCommodityExample" resultType="java.lang.Integer" >
+    select count(*) from shop_commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_commodity
+    <set >
+      <if test="record.shopCommodityId != null" >
+        shop_commodity_id = #{record.shopCommodityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopAccount != null" >
+        shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopName != null" >
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityId != null" >
+        commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityName != null" >
+        commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopCommodityExt1 != null" >
+        shop_commodity_ext1 = #{record.shopCommodityExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityDiscount != null" >
+        commodity_discount = #{record.commodityDiscount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_commodity
+    set shop_commodity_id = #{record.shopCommodityId,jdbcType=INTEGER},
+      shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      shop_commodity_ext1 = #{record.shopCommodityExt1,jdbcType=VARCHAR},
+      commodity_discount = #{record.commodityDiscount,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

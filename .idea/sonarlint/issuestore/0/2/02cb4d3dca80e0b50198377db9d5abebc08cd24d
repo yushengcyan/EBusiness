@@ -1,0 +1,23 @@
+
+Xsquid:S18548"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ
+Ysquid:S1854É"<Remove this useless assignment to local variable "response".(–˙Ë¢˙ˇˇˇˇ
+[squid:S1155Ñ">Use isEmpty() to check whether the collection is empty or not.(©ãı÷˙ˇˇˇˇ
+Vsquid:S1155à">Use isEmpty() to check whether the collection is empty or not.(ıÇÑŒ
+Ysquid:S1854ê"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ
+Ysquid:S1854î"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ
+Ssquid:S1854’"<Remove this useless assignment to local variable "response".(©”¸k
+Ssquid:S1854`"<Remove this useless assignment to local variable "response".(ı„Ç
+Ysquid:S1854È"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ
+Usquid:S1155e">Use isEmpty() to check whether the collection is empty or not.(ıÇÑŒ
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(±˜ú∏
+Ysquid:S1854£"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ
+Usquid:S1155">Use isEmpty() to check whether the collection is empty or not.(ò—æµ
+Ysquid:S1854£"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ
+[squid:S1155‹">Use isEmpty() to check whether the collection is empty or not.(©ãı÷˙ˇˇˇˇ
+Vsquid:S1155∑">Use isEmpty() to check whether the collection is empty or not.(ıÇÑŒ
+Ysquid:S1854ƒ"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ
+Ysquid:S1854˝"<Remove this useless assignment to local variable "response".(≤–‰¡¸ˇˇˇˇ
+]squid:S2259«"FA "NullPointerException" could be thrown; "response" is nullable here.(¯îı2
+Xsquid:S1854s"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ
+Tsquid:S1854≤"<Remove this useless assignment to local variable "response".(˘ÈÒÈ
+Xsquid:S1854*"<Remove this useless assignment to local variable "response".(ö ﬁê˛ˇˇˇˇ

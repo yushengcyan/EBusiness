@@ -1,0 +1,157 @@
+div.edit{
+    /*display: none;*/
+    padding-left: 2px;
+    border:1px solid gainsboro ;
+}
+div.edit>h1{
+    font-size: 2.0rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+div.edit-item{
+    /*生成两个带边框的框*/
+    box-sizing:border-box;
+    margin-top: 8px;
+}
+div.edit-item>label{
+    /*垂直对齐一副画像  将此元素放在父元素中部*/
+    vertical-align: middle;
+    text-align: right;
+    width: 13%;
+    margin-left: 5%;
+}
+
+div.edit-item>input{
+    /*垂直对齐一副画像  将此元素放在父元素中部*/
+    vertical-align: middle;
+    text-align: left;
+    width: 55%;
+    margin-left: 4%;
+    padding-left: 5px;
+}
+div.edit-item>select{
+    /*垂直对齐一副画像  将此元素放在父元素中部*/
+    vertical-align: middle;
+    text-align: left;
+    width: 55%;
+    margin-left: 4%;
+    padding-left: 5px;
+}
+div.edit-item>button{
+    border-radius: 4px;
+    width: 80px;
+    height: 40px;
+}
+.choseBack{
+    background-color: #E9E9E9;
+}
+.chose{
+    font-size: large;
+    font-weight: 400;
+    margin-top: 8px;
+    margin-left: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-family: "Adobe Caslon Pro Bold";
+    background-color: #E9E9E9;
+}
+.chose a:link{
+    color: green;
+    /*去掉下划线*/
+    text-decoration: none;
+}
+/*鼠标滑过连接时样式改变*/
+.chose a:hover{
+    color: black;
+    font-weight: bold;
+}
+
+#navli li{
+    margin-top: 15px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 15px;
+    color: dodgerblue;
+    /*将鼠标图标改为小手*/
+    cursor: pointer;
+}
+.friendInfo li{
+    /*去掉小原点*/
+    list-style-type: none;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 8px;
+    font-size: 15px;
+}
+.friendInfo li input{
+    border: none;
+    background-color: transparent;
+}
+.friendInfo li:hover{
+    background-color: #e0e0e0;
+    color: cornflowerblue;
+
+}
+
+#collectInfo a{
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+/*购物车样式*/
+#shopCart ul>li{
+    list-style-type: none;
+    display: inline-block;
+}
+#shopCartHead td{
+    /*display: block;*/
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 15px;
+}
+#shopCartInfo td{
+    padding-left: 15px;
+
+}
+#shopCartInfo button{
+    border-radius: 4px;
+}
+#subCount button{
+    border-radius: 0px;
+    height: 100%;
+    width: 30px;
+    margin: 0px;
+    padding: 0px;
+}
+#subCount span{
+    margin-top: -20px;
+    padding-top: -20px;
+}
+#addCount button{
+    border-radius: 0px;
+    height: 100%;
+    width: 30px;
+    margin: 0px;
+    padding: 0px;
+}
+#addCount span{
+    margin-top: -20px;
+    padding-top: -20px;
+}
+
+/*#editLevel,#editScore{*/
+    /*background-color: transparent;*/
+    /*border: none;*/
+/*}*/
+
+/*一直生效  因为url相同*/
+/*.chose a:visited{*/
+    /*font-weight: bold;*/
+    /*color: red;*/
+/*}*/

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <!-- 自适应屏幕分辨率-->
+    <meta name="viewport" content="width=device-width,inital-scale=1">
+
+    <link rel="stylesheet" href="../../css/util/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/module/frontSite/HomePage.css">
+    <link rel="stylesheet" href="../../css/module/frontSite/Community.css">
+    <link rel="stylesheet" href="../../css/util/footDiv.css">
+    <!-- 社区首页-->
+    <title>Community</title>
+</head>
+<body>
+<div class="container">
+    <!-- 导航栏-->
+    <nav class="navbar navbar-default row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="navbar-header navdiv">
+                <a href="#" class="navbar-brand"> 图标</a>
+            </div>
+            <div class="navbar-left" style="margin-top: 10px">
+                <ul class="nav nav-pills">
+                    <li class=" navulli"><a href="#" id="homePage">首页</a></li>
+                    <li class="active navulli"><a href="#" id="communityCenter">精选社区</a></li>
+                    <li class="navulli dropdown" style="margin-left: 15px">
+                        <a href="#" id="shopCenter" class="dropdown-toggle" data-toggle="dropdown">
+                            商家中心<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="addShop">申请开店</a></li>
+                            <!--分割符-->
+                            <li class="divider"></li>
+                            <li><a href="#" id="ownShop">已有店铺</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar navbar-left navdiv">
+                <ul class="nav nav-pills">
+                    <li class="navulli">
+                        <a href="#" id="userCenter">个人中心</a>
+                    </li>
+                </ul>
+            </div>
+            <!--搜索框-->
+            <div class="navbar-left" style="margin-top: 10px">
+                <form class="navbar-form " role="search">
+                    <div class="input-group">
+                        <input type="text" id="searchContent" placeholder="请输入搜索内容"/>
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" id="searchPro" type="button" style="height: 26px;">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true" style=""></span>
+                                </button>
+                            </span>
+                    </div>
+                </form>
+            </div>
+            <div class="navbar navbar-right" style="margin-top: 10px">
+                <ul class="nav nav-pills">
+                    <li class="navulli">
+                        <a href="#" id="log"><span class="glyphicon glyphicon-user"></span><span>登录</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--评论悬浮弹窗-->
+    <div id="commentFloat">
+        <textarea id="commentcontent" style=""></textarea>
+        <div style="text-align: right;height: 15%;margin-top: -2px;">
+            <button class="btn btn-info btn-sm" id="addComment">评论</button>
+            <button class="btn btn-warning cancel btn-sm">取消</button>
+        </div>
+    </div>
+
+    <!--发布文章弹窗-->
+    <div id="articleFloat" class="row" style="display: none">
+        <div style="margin-top: 40px; "></div>
+        <!--搜索商品框-->
+        <div class="col-md-8 col-md-offset-2 input-group">
+            <input type="text" class="form-control" id="searchKey" placeholder="请输入商品名">
+            <span class="input-group-addon" id="search">
+                <span class="glyphicon glyphicon-zoom-in"></span>
+            </span>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <label>商品名：</label>
+            <select name="" id="productId" style="width: 100%;height: 30px">
+                <option value="0">请选择</option>
+            </select>
+            <script id="productIdTmpl" type="text/x-jsrender">
+                {{for}}
+                <option value="{{:commodityId}}">{{:commodityName}}</option>
+                {{/for}}
+            </script>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <label for="">文章标题：</label>
+            <input id="releaseTitle" type="text">
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <label>文章类型：</label>
+            <select name="" id="articleType">
+                <option value="0">请选择</option>
+                <option value="1003">鞋子</option>
+            </select>
+            <script id="articleTypeTmpl" type="text/x-jsrender">
+                {{for}}
+                <option value="{{:articleTypeId}}">{{:articleTypeName}}</option>
+                {{/for}}
+            </script>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <label for="">文章内容：</label>
+            <textarea type="text" id="releaseContent"></textarea>
+        </div>
+        <div class="col-md-8 col-md-offset-2" style="text-align: center">
+            <button class="btn btn-info" id="addArticle" style="margin-right: 30px">确认</button>
+            <button class="btn btn-warning cancel" style="margin-left: 30px">取消</button>
+        </div>
+    </div>
+     <!--类别模块-->
+    <div>
+        <div style="width: 80%;float: left">
+            <ul class="nav nav-pills" id="type" style="justify-content: space-around;">
+                <li><a href="#" class="typeClick">零食</a></li>
+                <li><a href="#" class="typeClick">衣服</a></li>
+                <li><a href="#" class="typeClick">鞋子</a></li>
+                <li><a href="#" class="typeClick">手机</a></li>
+                <li><a href="#" class="typeClick">零食</a></li>
+                <li><a href="#" class="typeClick">衣服</a></li>
+                <li><a href="#" class="typeClick">鞋子</a></li>
+                <li><a href="#" class="typeClick">手机</a></li>
+                <li><a href="#" class="typeClick">零食</a></li>
+                <li><a href="#" class="typeClick">衣服</a></li>
+                <li><a href="#" class="typeClick">鞋子</a></li>
+                <li><a href="#" class="typeClick">手机</a></li>
+                <li><a href="#" class="typeClick">零食</a></li>
+            </ul>
+        </div>
+        <script id="typeTmpl" type="text/x-jsrender">
+        {{for}}
+            <li><a href="#" class="typeClick" typeId="{{:articleTypeId}}">{{:articleTypeName}}</a></li>
+        {{/for}}
+    </script>
+        <div style="width: 20%;float: left;">
+            <button class="btn btn-info btn-lg" id="showRelease" style="float: right;margin-right: -15px">发布文章</button>
+        </div>
+    </div>
+    <!-- 文章页-->
+    <div class="row">
+        <div class="col-md-12">
+            <div style="width: 1200px;">
+                <ul class="article" id="article">
+                    <li>
+                        <div style="height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>标题</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+                            <div class="articleContent" style="height: 80px">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" title="点赞">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>标题</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+                            <div class="articleContent" style="height: 80px">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" title="点赞">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>标题</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+                            <div class="articleContent" style="height: 80px">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" title="点赞">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>标题</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+                            <div class="articleContent" style="height: 80px">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" title="点赞">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>标题</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+                            <div class="articleContent" style="height: 80px">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" title="点赞">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>标题</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+                            <div class="articleContent" style="height: 80px">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" title="点赞">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>标题</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+                            <div class="articleContent" style="height: 80px">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" title="点赞">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>标题</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+                            <div class="articleContent" style="height: 80px">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" title="点赞">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <script id="articleTmpl" type="text/x-jsrender">
+                    {{for}}
+                    <li>
+                        <div style="height: 100px">
+                            <div>
+                                <span style="margin-left: 5px"><strong>{{:articleTitle}}</strong></span>
+                                <span style="float: right;margin-right: 5px;margin-top: 3px">
+                                    <a href="#" class="collect" articleId="{{:articleId}}" title="收藏">
+                                       <span class="glyphicon glyphicon-tags"></span>
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="height: 1px;border: 1px solid darkgray;margin-top: 3px;margin-bottom: 3px"></div>
+
+                            <div class="articleContent liClick" articleId="{{:articleId}}"  style="height: 80px">
+                                {{:articleComtent}}
+                            </div>
+                            <div style="margin-bottom: 1px">
+                                <a href="#" class="btn btn-default btn-sm likeUp" articleId="{{:articleId}}" title="点赞" value="1">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="#" class="btn btn-default btn-sm comment" articleId="{{:articleId}}" author="{{:userAccount}}" title="评论">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    {{/for}}
+                </script>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--底部-->
+<footer class="footer">
+    <div class="container">
+        <div class="col-md-6">
+            <h1>心晴社区分享电商平台</h1>
+            <p>我们一直致力于追求更好</p>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <h4>关于我们</h4>
+                <ul class="list-unstyled">
+                    <li>关于我们</li>
+                    <li>友情链接</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>联系方式</h4>
+                <ul class="list-unstyled">
+                    <li><a href="">电话</a></li>
+                    <li><a href="">电子邮箱</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>赞助商</h4>
+                <ul class="list-unstyled">
+                    <li><a href="">心晴</a></li>
+                    <li><a href="">6034</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="../../js/util/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../js/util/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/util/jquery/jquery.params.js"></script>
+<script type="application/javascript" src="../../js/util/require-2.3.6.js"></script>
+<script type="application/javascript" src="../../js/module/front/LogOn.js"></script>
+<script type="text/javascript" src="../../js/util/seajs/2.3.0/dist/sea.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        base:'/EBusiness/js/',
+        alias:{
+            'jquery':'util/jquery/1.9.1/jquery'
+        },
+        charset:'utf-8',
+    })
+    seajs.use(['module/front/community'],function (community) {
+//            community.Init();
+    })
+</script>
+</body>
+
+</html>

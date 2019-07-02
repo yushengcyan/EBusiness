@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.ShopBaseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.ShopBaseInfo" >
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="shop_account" property="shopAccount" jdbcType="VARCHAR" />
+    <result column="shop_user_account" property="shopUserAccount" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="shop_user_name" property="shopUserName" jdbcType="VARCHAR" />
+    <result column="shop_level" property="shopLevel" jdbcType="INTEGER" />
+    <result column="shop_money" property="shopMoney" jdbcType="DECIMAL" />
+    <result column="shop_number" property="shopNumber" jdbcType="INTEGER" />
+    <result column="shop_address" property="shopAddress" jdbcType="VARCHAR" />
+    <result column="shop_status" property="shopStatus" jdbcType="INTEGER" />
+    <result column="shop_start_time" property="shopStartTime" jdbcType="DATE" />
+    <result column="shop_end_time" property="shopEndTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shop_id, shop_account, shop_user_account, shop_name, shop_user_name, shop_level, 
+    shop_money, shop_number, shop_address, shop_status, shop_start_time, shop_end_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.ShopBaseInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.ShopBaseInfoExample" >
+    delete from shop_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.ShopBaseInfo" >
+    insert into shop_base_info (shop_id, shop_account, shop_user_account, 
+      shop_name, shop_user_name, shop_level, 
+      shop_money, shop_number, shop_address, 
+      shop_status, shop_start_time, shop_end_time
+      )
+    values (#{shopId,jdbcType=INTEGER}, #{shopAccount,jdbcType=VARCHAR}, #{shopUserAccount,jdbcType=VARCHAR}, 
+      #{shopName,jdbcType=VARCHAR}, #{shopUserName,jdbcType=VARCHAR}, #{shopLevel,jdbcType=INTEGER}, 
+      #{shopMoney,jdbcType=DECIMAL}, #{shopNumber,jdbcType=INTEGER}, #{shopAddress,jdbcType=VARCHAR}, 
+      #{shopStatus,jdbcType=INTEGER}, #{shopStartTime,jdbcType=DATE}, #{shopEndTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.ShopBaseInfo" >
+    insert into shop_base_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="shopAccount != null" >
+        shop_account,
+      </if>
+      <if test="shopUserAccount != null" >
+        shop_user_account,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="shopUserName != null" >
+        shop_user_name,
+      </if>
+      <if test="shopLevel != null" >
+        shop_level,
+      </if>
+      <if test="shopMoney != null" >
+        shop_money,
+      </if>
+      <if test="shopNumber != null" >
+        shop_number,
+      </if>
+      <if test="shopAddress != null" >
+        shop_address,
+      </if>
+      <if test="shopStatus != null" >
+        shop_status,
+      </if>
+      <if test="shopStartTime != null" >
+        shop_start_time,
+      </if>
+      <if test="shopEndTime != null" >
+        shop_end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopAccount != null" >
+        #{shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopUserAccount != null" >
+        #{shopUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopUserName != null" >
+        #{shopUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLevel != null" >
+        #{shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="shopMoney != null" >
+        #{shopMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="shopNumber != null" >
+        #{shopNumber,jdbcType=INTEGER},
+      </if>
+      <if test="shopAddress != null" >
+        #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shopStatus != null" >
+        #{shopStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shopStartTime != null" >
+        #{shopStartTime,jdbcType=DATE},
+      </if>
+      <if test="shopEndTime != null" >
+        #{shopEndTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.ShopBaseInfoExample" resultType="java.lang.Integer" >
+    select count(*) from shop_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_base_info
+    <set >
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopAccount != null" >
+        shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopUserAccount != null" >
+        shop_user_account = #{record.shopUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopName != null" >
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopUserName != null" >
+        shop_user_name = #{record.shopUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLevel != null" >
+        shop_level = #{record.shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopMoney != null" >
+        shop_money = #{record.shopMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopNumber != null" >
+        shop_number = #{record.shopNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopAddress != null" >
+        shop_address = #{record.shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopStatus != null" >
+        shop_status = #{record.shopStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopStartTime != null" >
+        shop_start_time = #{record.shopStartTime,jdbcType=DATE},
+      </if>
+      <if test="record.shopEndTime != null" >
+        shop_end_time = #{record.shopEndTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_base_info
+    set shop_id = #{record.shopId,jdbcType=INTEGER},
+      shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      shop_user_account = #{record.shopUserAccount,jdbcType=VARCHAR},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      shop_user_name = #{record.shopUserName,jdbcType=VARCHAR},
+      shop_level = #{record.shopLevel,jdbcType=INTEGER},
+      shop_money = #{record.shopMoney,jdbcType=DECIMAL},
+      shop_number = #{record.shopNumber,jdbcType=INTEGER},
+      shop_address = #{record.shopAddress,jdbcType=VARCHAR},
+      shop_status = #{record.shopStatus,jdbcType=INTEGER},
+      shop_start_time = #{record.shopStartTime,jdbcType=DATE},
+      shop_end_time = #{record.shopEndTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <select id="getAccount" resultType="java.lang.String">
+    select shop_account
+    from shop_base_info
+    ORDER BY shop_id DESC
+  </select>
+
+</mapper>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <!-- 自适应屏幕分辨率-->
+    <meta name="viewport" content="width=device-width,inital-scale=1">
+
+    <link rel="stylesheet" href="../../css/util/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/module/frontSite/HomePage.css">
+    <link rel="stylesheet" href="../../css/module/frontSite/ShopInfo.css">
+    <link rel="stylesheet" href="../../css/util/footDiv.css">
+    <!-- 店铺信息-->
+    <title>ShopInfo</title>
+</head>
+<body>
+<div class="container">
+    <!--开店弹窗-->
+    <div class="logIn" id="addShopFloat" style="display: none">
+        <div style="height: 30px;">
+            <h4><strong>申请开店</strong></h4>
+        </div>
+        <div>
+            <label for="">店铺名:</label>
+            <input type="text" id="addshopName">
+        </div>
+        <div>
+            <label for="">店主名:</label>
+            <input type="text" id="addshopUserName">
+        </div>
+        <div>
+            <label for="">发货地:</label>
+            <input type="text" id="addshopAddress">
+        </div>
+        <div style="text-align: center">
+            <button id="addShopInfo" class="btn btn-info" style="margin-right: 30px">确认开店</button>
+            <button class="btn btn-warning cancel" style="margin-left: 30px">取消</button>
+        </div>
+    </div>
+    <!--新增商品弹窗-->
+    <form action="/EBusiness/shop/uploadImg" id="addProductInfo" method="post" enctype="multipart/form-data" style="display: none;">
+        <div class="logIn"  style="overflow-y: scroll;width: 500px;height: 350px;display: block;overflow-y: scroll">
+        <div style="height: 30px;">
+            <h4><strong>新增商品</strong></h4>
+        </div>
+        <div>
+            <label for="">商品名</label>
+            <input type="text" id="addProName" name="addProName">
+        </div>
+        <div>
+            <label for="">商品价格</label>
+            <input type="text" id="addProPrice" name="addProPrice">
+        </div>
+        <div>
+            <label for="">商品描述</label>
+            <input type="text" id="addProDesc" name="addProDesc">
+        </div>
+        <div>
+            <label for="">商品折扣</label>
+            <input type="text" id="addProDiscount" name="addProDiscount">
+        </div>
+        <div>
+            <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+            style="margin-left: 150px;">
+        </div>
+            <input type="hidden" id="addShopAccount" name="addShopAccount">
+            <input type="hidden" id="addShopProName" name="addShopProName">
+        <div style="text-align: center">
+            <button class="btn btn-info" id="addProInfo" style="margin-right: 15px;">确认</button>
+            <button class="btn btn-warning cancel" style="margin-right: 15px;">取消</button>
+        </div>
+
+    </div>
+    </form>
+    <!--更改商品信息弹窗-->
+    <div class="logIn" id="editProductInfo" style="overflow-y: scroll;display: none;height: 300px">
+        <div>
+            <label for="">商品名：</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">商品价格：</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">商品折扣</label>
+            <input type="text">
+        </div>
+        <!--图片上传删除-->
+        <!--<div style="width: 100%">-->
+            <!--<ul style="width: 100%">-->
+                <!--<li>-->
+                    <!--<img src="../../upload/ProductImg/sp_8_10008_1.jpg" alt="" style="width: 80px;height: 80px">-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<img src="../../upload/ProductImg/sp_1_10001_1.jpg" alt="" style="width: 80px;height: 80px">-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<img src="../../upload/ProductImg/sp_11_10006_1.jpg" alt="" style="width: 80px;height: 80px">-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div style="text-align: center">
+            <button class="btn btn-info btn-sm" >保存</button>
+            <button class="btn btn-warning btn-sm">取消</button>
+        </div>
+    </div>
+    <script id="editProductInfoTmpl" type="text/x-jsrender">
+        <div>
+            <label for="">商品名：</label>
+            <input type="text" id="editProName" value="{{:commodityName}}">
+        </div>
+        <div>
+            <label for="">商品价格：</label>
+            <input type="text" id="editProPrice" value="{{:shopCommodityExt1}}">
+        </div>
+        <div>
+            <label for="">商品折扣</label>
+            <input type="text" id="eidtProDiscount" value="{{:commodityDiscount}}">
+        </div>
+        <!--图片上传删除-->
+        <!--<div style="width: 100%">-->
+            <!--<ul>-->
+                <!--<li>-->
+                    <!--<img src="../../upload/ProductImg/sp_8_10008_1.jpg" alt="" style="width: 80px;height: 80px">-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<img src="../../upload/ProductImg/sp_1_10001_1.jpg" alt="" style="width: 80px;height: 80px">-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<img src="../../upload/ProductImg/sp_11_10006_1.jpg" alt="" style="width: 80px;height: 80px">-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div style="text-align: center">
+            <button class="btn btn-info btn-sm" id="editProSave" unionId={{:shopCommodityId}}>保存</button>
+            <button class="btn btn-warning btn-sm cancel">取消</button>
+        </div>
+    </script>
+    <!-- 导航栏-->
+    <nav class="navbar navbar-default row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="navbar-header navdiv">
+                <a href="#" class="navbar-brand"> 图标</a>
+            </div>
+            <div class="navbar-left" style="margin-top: 10px">
+                <ul class="nav nav-pills">
+                    <li class="navulli"><a href="#" id="homePage">首页</a></li>
+                    <li class="navulli"><a href="#" id="communityCenter">精选社区</a></li>
+                    <li class="active navulli dropdown" style="margin-left: 15px">
+                        <a href="#" id="shopCenter" class="dropdown-toggle" data-toggle="dropdown">
+                            商家中心<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="addShop">申请开店</a></li>
+                            <!--分割符-->
+                            <li class="divider"></li>
+                            <li><a href="#" id="ownShop">已有店铺</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar navbar-left navdiv">
+                <ul class="nav nav-pills">
+                    <li class="navulli">
+                        <a href="#" id="userCenter">个人中心</a>
+                    </li>
+                </ul>
+            </div>
+            <!--搜索框-->
+            <div class="navbar-left" style="margin-top: 10px">
+                <form class="navbar-form " role="search">
+                    <div class="input-group">
+                        <input type="text" id="searchContent" placeholder="请输入搜索内容"/>
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" id="searchPro" type="button" style="height: 26px;">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true" style=""></span>
+                                </button>
+                            </span>
+                    </div>
+                </form>
+            </div>
+            <div class="navbar navbar-right" style="margin-top: 10px">
+                <ul class="nav nav-pills">
+                    <li class="navulli">
+                        <a href="logIn.html" id=""><span class="glyphicon glyphicon-user"></span>登录</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--店铺信息-->
+    <div class="row">
+        <!--左侧导航栏-->
+        <div class="col-md-3">
+            <div>
+                <div class="choseLog" choseLog="1">
+                    <a href="#">店铺基本信息</a>
+                </div>
+            </div>
+            <div>
+                <div class="choseLog" choseLog="2">
+                    <a href="#">店铺订单信息</a>
+                </div>
+            </div>
+            <!--包含删除商品和上传商品，上传做弹窗-->
+            <div>
+                <div class="choseLog" choseLog="3">
+                    <a href="#">店铺商品管理</a>
+                </div>
+            </div>
+            <div>
+                <div class="choseLog" choseLog="4">
+                    <a href="#">店铺交易总信息</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9"  style="border: 1px solid #e8e8e8">
+            <!--商铺基本信息-->
+            <div id="shopBaseInfo" class="info" style="display: block">
+                <div>
+                    <h3>
+                        <span>店铺信息:</span>
+                        <span style="float:right;font-size:16px;margin-right: 120px;margin-bottom: -20px;">
+                            <a href="#" style="margin-buttom:-20px;margin-bottom: -20px">修改</a>
+                        </span>
+                    </h3>
+                </div>
+                <div style="height: 20px;"></div>
+                <div>
+                    <label for="">店铺名:</label>
+                    <input type="text" id="" shopInfoAccount="{{:}}">
+                </div>
+                <div>
+                    <label for="">店主名:</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label for="">店铺成交量:</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label for="">店铺成交额:</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label for="">店铺等级:</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label for="">店铺地址:</label>
+                    <input type="text">
+                </div>
+            </div>
+            <script id="shopBaseInfoTmpl" type="text/x-jsrender">
+                <div>
+                    <h3>
+                    <span>店铺信息:</span>
+                    <span id="updateShop"><a href="#" style="margin-buttom:-20px;">修改</a></span>
+                    </h3>
+                </div>
+                <div style="height: 20px;"></div>
+                <div>
+                    <label for="">店铺名:</label>
+                    <input type="text" id="shopInfoName" value="{{:shopName}}" shopInfoAccount="{{:shopAccount}}" shopId={{:shopId}} readonly>
+                </div>
+                <div>
+                    <label for="">店主名:</label>
+                    <input id="userName" type="text" value="{{:shopUserName}}">
+                </div>
+                <div>
+                    <label for="">店铺成交量:</label>
+                    {{if shopNumber==null || shopNumber==""}}
+                    <input type="text" value="0" readonly>
+                    {{else}}
+                    <input type="text" value="{{:shopNumber}}" disabled="disabled" readonly>
+                    {{/if}}
+                </div>
+                <div>
+                    <label for="">店铺成交额:</label>
+                    {{if shopMoney=='' || shopMoney==null}}
+                    <input type="text" value="0" disabled="disabled" readonly>
+                    {{else}}
+                    <input type="text" value="{{:shopMoney}}" readonly>
+                    {{/if}}
+                </div>
+                <div>
+                    <label for="">店铺等级:</label>
+                    <input type="text"  id="shopLevelId" value="{{:shopLevel}}" disabled="disabled" readonly>
+                </div>
+                <div>
+                    <label for="">店铺地址:</label>
+                    <input id="shopAddress" type="text" value="{{:shopAddress}}">
+                </div>
+                <div id="updateButton" style="text-align:center;display:none">
+                    <button id="saveShopInfo" class="btn btn-info" style="margin-right:20px;">确认修改</button>
+                    <button class="btn btn-warning cancel" style="margin-left:20px;">取消</button>
+                </div>
+            </script>
+            <!--店铺订单信息-->
+            <div id="orderInfo" class="info" style="display: none;">
+                <div><h3>店铺订单信息</h3></div>
+                <div>
+                    <ul class="orderType">
+                        <li>
+                            <a href="#" class="getTypeOrder" ordertype="" style="color:red">全部订单</a>
+                        </li>
+                        <li>
+                            <a  class="getTypeOrder" ordertype="1" href="#">待发货订单</a>
+                        </li>
+                        <li>
+                            <a href="#"  class="getTypeOrder" ordertype="2">待签收订单</a>
+                        </li>
+                        <li>
+                            <a href="#"  class="getTypeOrder" ordertype="3">已签收订单</a>
+                        </li>
+                        <li>
+                            <a href="#" class="getTypeOrder" ordertype="0">已完成订单</a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="margin-left: 50px;">
+                    <table class="table table-responsive" style="width: 100%">
+                        <thead style="font-weight: 600">
+                        <tr>
+                            <td>订单编号</td>
+                            <td>订单商品</td>
+                            <td>商品价格</td>
+                            <td>商品数量</td>
+                            <td>商品折扣</td>
+                            <td>交易额</td>
+                            <td class="state">状态</td>
+                            <td class="operator" style="text-align: center">操作（发货）</td>
+                        </tr>
+                        </thead>
+                        <tbody id="orderInfoShow">
+                        <tr style="margin-top: 5px">
+                            <td>100001</td>
+                            <td>特步</td>
+                            <td>￥233</td>
+                            <td>1</td>
+                            <td>33</td>
+                            <td>200</td>
+                            <td class="state">未发货</td>
+                            <td class="operator" style="text-align:center">
+                                <button class="btn btn-info btn-sm">发货</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <script id="orderInfoShowTmpl" type="text/x-jsrender">
+                            <tr style="margin-top: 5px">
+                            {{for}}
+                                <td>
+                                    <span>{{:userOrdeId}}</span>
+                                </td>
+                                <td>
+                                    <span>{{:commodityName}}</span>
+                                </td>
+                                <td>
+                                    <span>￥{{:commodityPrice}}</span>
+                                </td>
+                                <td>
+                                    <span>{{:commodityNumber}}</span>
+                                </td>
+                                <td>
+                                    <span>￥{{:discountPrice}}</span>
+                                </td>
+                                <td>
+                                    <span>￥{{:orderMoney}}</span>
+                                </td>
+                                <td class="state">
+                                    {{if orderStatus==1}}
+                                    <span>未发货</span>
+                                    {{else orderStatus==2}}
+                                    <span>已发货</span>
+                                    {{else orderStatus==3}}
+                                    <span>已收货</span>
+                                    {{else orderStatus==0}}
+                                    <span>已完成</span>
+                                    {{/if}}
+                                </td>
+                                <td class="operator" style="text-align:center">
+                                    <button id="acceptOrder" class="btn btn-info btn-sm" orderId={{:userOrdeId}}>发货</button>
+                                    <button id="rollBackOrder" class="btn btn-info btn-sm" orderId={{:userOrdeId}}>退回订单</button>
+                                </td>
+                            {{/for}}
+                            </tr>
+                        </script>
+                    </table>
+
+                </div>
+            </div>
+            <!--店铺商品展示和删除-->
+            <div id="productInfo" class="info" style="display: none">
+                <div>
+                    <h3>
+                        <span>店铺商品列表:</span>
+                        <span style="float:right;font-size:16px;margin-right: 120px;margin-bottom: -20px;">
+                            <a href="#" id="addProduct" style="margin-buttom:-20px;margin-bottom: -20px">新增商品</a>
+                        </span>
+                    </h3>
+                </div>
+                <!--<div>-->
+                    <!--<ul class="orderType">-->
+                        <!--<li><a href="#">商品列表</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <div style="margin-left: 50px">
+                    <!--商品列表-->
+                    <table class="table table-responsive" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <td>商品编号</td>
+                            <td>商品名</td>
+                            <td>商品价格</td>
+                            <td>商品优惠</td>
+                            <td style="text-align: center">操作（删除/更改）</td>
+                        </tr>
+                        </thead>
+                        <tbody id="proList">
+                        <tr>
+                            <td>111111</td>
+                            <td>anta</td>
+                            <td>￥2222</td>
+                            <td>200</td>
+                            <td>
+                                <button class="btn btn-danger">删除</button>
+                                <button class="btn btn-warning">更改</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <script id="proListTmpl" type="text/x-jsrender">
+                            <tr>
+                            {{for}}
+                            <td>
+                                <span>{{:commodityId}}</span>
+                            </td>
+                            <td>
+                                <span>{{:commodityName}}</span>
+                            </td>
+                            <td>
+                                <span>{{:shopCommodityExt1}}</span>
+                            </td>
+                            <td>
+                                <span>{{:commodityDiscount}}</span>
+                            </td>
+                            <td style="text-align:center">
+                                <button class="btn btn-danger delPro" style="margin-right:10px" unionId="{{:shopCommodityId}}">删除</button>
+                                <button class="btn btn-warning editProduct" style="margin-left:10px" unionId="{{:shopCommodityId}}">更改</button>
+                            </td>
+                            {{/for}}
+                            </tr>
+                        </script>
+                    </table>
+                </div>
+            </div>
+            <!--店铺总体信息-->
+            <div id="totalInfo" class="info" style="display: none">
+                <div><h3>店铺交易总信息</h3></div>
+                <div style="text-align: center;font-size: 22px">
+                    <p><sapn>店铺成立至今已经成为了<strong id="levelName">XXX</strong>等级店铺</sapn></p>
+                    <p><span>已经有<strong id="tradeNum">XXX</strong>笔交易记录</span></p>
+                    <p><span>总交易额达到了<strong id="tradeMoney">XXX</strong></span></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--底部-->
+<footer class="footer">
+    <div class="container">
+        <div class="col-md-6">
+            <h1>心晴社区分享电商平台</h1>
+            <p>我们一直致力于追求更好</p>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <h4>关于我们</h4>
+                <ul class="list-unstyled">
+                    <li>关于我们</li>
+                    <li>友情链接</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>联系方式</h4>
+                <ul class="list-unstyled">
+                    <li><a href="">电话</a></li>
+                    <li><a href="">电子邮箱</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>赞助商</h4>
+                <ul class="list-unstyled">
+                    <li><a href="">心晴</a></li>
+                    <li><a href="">6034</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="../../js/util/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../js/util/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/util/jquery/jquery.params.js"></script>
+<script type="application/javascript" src="../../js/util/require-2.3.6.js"></script>
+<script type="application/javascript" src="../../js/module/front/LogOn.js"></script>
+<script type="text/javascript" src="../../js/util/seajs/2.3.0/dist/sea.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        base:'/EBusiness/js/',
+        alias:{
+            'jquery':'util/jquery/1.9.1/jquery'
+        },
+        charset:'utf-8',
+    })
+    seajs.use(['module/front/shopInfo'],function (shopInfo) {
+//
+    })
+</script>
+</body>
+
+</html>

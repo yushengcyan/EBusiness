@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="../../fonts/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../fonts/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../css/module/backStage/styles.css">
+    <link rel="stylesheet" href="../../css/module/backStage/formSearch.css">
+</head>
+<body class="sidebar-fixed header-fixed">
+<div class="page-wrapper">
+
+    <!--编辑弹窗-->
+    <div id="editAdmin" class="edit" style="overflow-y: scroll;height: 240px"></div>
+    <script id="editTmpl" type="text/x-jsrenedr">
+            <h1>编辑</h1>
+            <div class="edit-item">
+                <label for="editAccount">管理员帐号</label>
+                <input type="text" id="editAccount" value="{{:adminAccount}}" readonly>
+            </div>
+            <div class="edit-item">
+                <label for="editPassword">管理员密码</label>
+                <input type="password" id="editPassword">
+            </div>
+            <div class="edit-item">
+                <label for="editLevel">权限等级</label>
+                <select id="editLevel">
+                    <option value="">请选择</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class="edit-item">
+                <button id="editSava">确认</button>
+                <button class="cancle">取消</button>
+            </div>
+        </script>
+
+    <div class="page-header">
+        <nav class="navbar page-header">
+            <a href="#" class="btn btn-link sidebar-mobile-toggle d-md-none mr-auto">
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../../images/background/avatar-1.png" class="avatar avatar-sm" alt="logo">
+                        <span class="small ml-1 d-md-down-none">John Smith</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-header">Account</div>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-user"></i> Profile
+                        </a>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-envelope"></i> Messages
+                        </a>
+
+                        <div class="dropdown-header">Settings</div>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-bell"></i> Notifications
+                        </a>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-wrench"></i> Settings
+                        </a>
+
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-lock"></i> Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <li class="nav-title">常用</li>
+
+                    <li class="nav-item">
+                        <a href="backStage.html" class="nav-link active">
+                            <i class="icon icon-speedometer"></i> 首页
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="UserManage.html" class="nav-link">
+                            <i class="icon icon-speedometer"></i> 用户管理 <i ></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="Community.html" class="nav-link">
+                            <i class="icon icon-speedometer"></i> 社区管理 <i ></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="Manager.html" class="nav-link">
+                            <i class="icon icon-puzzle"></i> 管理员管理
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="ShopMallManage.html" class="nav-link">
+                            <i class="icon icon-grid"></i> 商城管理
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+
+                <!--搜索框-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-light">
+                                管理员
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="searchAdmin" class="form-control-label">管理员账号</label>
+                                            <input id="searchAdmin"  class="form-control" placeholder="请输入管理员帐号">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="password" class="form-control-label">管理员密码</label>
+                                            <input id="password" class="form-control" type="" placeholder="请输入管理员密码">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="adminLevel">管理员权限等级</label>
+                                            <select id="adminLevel" class="form-control">
+                                                <option value="">请选择</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4 row">
+                                        <div class="col-md-4">
+                                            <button class="btn btn-block" id="addAdmin">新增</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-block" id="search">搜索</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-block" class="cancle">取消</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--管理员列表-->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                        <div class="card-header bg-light">
+                            管理员列表
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>管理员帐号</th>
+                                        <th>管理员角色</th>
+                                        <th style="text-align: center">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="ManagerList">
+                                    </tbody>
+                                    <script id="ManagerListTmpl" type="text/x-jsrender">
+                                        {{for}}
+                                            <tr>
+                                                <td>{{:#getIndex()+1}}</td>
+                                                <td>{{:adminAccount}}</td>
+                                                <td>{{:adminLevel}}</td>
+                                                <td style="text-align:center;">
+                                                    <button class="btnEdit" adminAccount={{:adminAccount}}>编辑</button>
+                                                    <button class="btnDel" adminAccount={{:adminAccount}} style="margin-left:10px">删除</button>
+                                                </td>
+                                            </tr>
+                                        {{/for}}
+                                    </script>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!--管理员权限关系-->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-light">
+                                管理员权限
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>角色等级</th>
+                                                    <th>角色名称</th>
+                                                    <th>角色权限描述</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="adminRole"></tbody>
+                                            <script id="adminRoleTmpl" type="text/x-jsrender">
+                                            {{for}}
+                                                <tr>
+                                                    <td>{{:adminLevelId}}</td>
+                                                    <td>{{:adminLevelRole}}</td>
+                                                    <td>{{:adminLevelDesc}}</td>
+                                                </tr>
+                                            {{/for}}
+                                        </script>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/util/jquery-i18n/jquery/jquery.min.js"></script>
+<script src="../../js/util/popper.js/popper.min.js"></script>
+<script src="../../js/util/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../js/util/chart.js/chart.min.js"></script>
+<script src="../../js/module/backStage/carbon.js"></script>
+<script src="../../js/module/backStage/demo.js"></script>
+<script type="text/javascript" src="../../js/util/seajs/2.3.0/dist/sea.js"></script>
+<script type="text/javascript" src="../../js/util/config.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        //配置基础路径
+        base:'/EBusiness/js/',
+        alias:{
+            'jquery':'util/jquery/1.9.1/jquery',
+        },
+        paths:{
+            'js':'/EBusiness/js/'
+        },
+        charset:'utf-8',
+    })
+
+    seajs.use(['module/backStage/Manager'],function (manager) {
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="../../fonts/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../fonts/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../css/module/backStage/styles.css">
+</head>
+<body>
+<div class="page-wrapper flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card p-4">
+                    <div class="card-header text-center text-uppercase h4 font-weight-light">
+                        注册中心
+                    </div>
+                    <div class="card-body py-5">
+                        <div class="form-group">
+                            <label class="form-control-label">用户名</label>
+                            <input type="name" class="form-control" id="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">手机号</label>
+                            <input type="email" class="form-control" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">密码</label>
+                            <input type="password" class="form-control" id="pwd">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">确认密码</label>
+                            <input type="password" class="form-control" id="pwdC">
+                        </div>
+                        <div>
+                            <p id="tips" style="color: red"></p>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success btn-block" id="register">注册</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../js/util/jquery-i18n/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/util/popper.js/popper.min.js"></script>
+<script type="text/javascript" src="../../js/util/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/util/seajs/2.3.0/dist/sea.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        base:"/EBusiness/js/",
+        alias:{
+            'jquery':'util/jquery/1.9.1/jquery',
+        },
+        charset:'utf-8',
+    });
+    seajs.use(['module/front/register'],function (register) {})
+</script>
+</body>
+</html>

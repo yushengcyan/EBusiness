@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.AritcleCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.AritcleComment" >
+    <result column="article_comment_id" property="articleCommentId" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="INTEGER" />
+    <result column="author_account" property="authorAccount" jdbcType="VARCHAR" />
+    <result column="article_comment_content" property="articleCommentContent" jdbcType="VARCHAR" />
+    <result column="article_comment_sec" property="articleCommentSec" jdbcType="INTEGER" />
+    <result column="article_comment_time" property="articleCommentTime" jdbcType="DATE" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    article_comment_id, article_id, author_account, article_comment_content, article_comment_sec, 
+    article_comment_time, user_account
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.AritcleCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from aritcle_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.AritcleCommentExample" >
+    delete from aritcle_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.AritcleComment" >
+    insert into aritcle_comment (article_comment_id, article_id, author_account, 
+      article_comment_content, article_comment_sec, 
+      article_comment_time, user_account)
+    values (#{articleCommentId,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{authorAccount,jdbcType=VARCHAR}, 
+      #{articleCommentContent,jdbcType=VARCHAR}, #{articleCommentSec,jdbcType=INTEGER}, 
+      #{articleCommentTime,jdbcType=DATE}, #{userAccount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.AritcleComment" >
+    insert into aritcle_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleCommentId != null" >
+        article_comment_id,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="authorAccount != null" >
+        author_account,
+      </if>
+      <if test="articleCommentContent != null" >
+        article_comment_content,
+      </if>
+      <if test="articleCommentSec != null" >
+        article_comment_sec,
+      </if>
+      <if test="articleCommentTime != null" >
+        article_comment_time,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleCommentId != null" >
+        #{articleCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="authorAccount != null" >
+        #{authorAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCommentContent != null" >
+        #{articleCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCommentSec != null" >
+        #{articleCommentSec,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentTime != null" >
+        #{articleCommentTime,jdbcType=DATE},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.AritcleCommentExample" resultType="java.lang.Integer" >
+    select count(*) from aritcle_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update aritcle_comment
+    <set >
+      <if test="record.articleCommentId != null" >
+        article_comment_id = #{record.articleCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleId != null" >
+        article_id = #{record.articleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.authorAccount != null" >
+        author_account = #{record.authorAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleCommentContent != null" >
+        article_comment_content = #{record.articleCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleCommentSec != null" >
+        article_comment_sec = #{record.articleCommentSec,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleCommentTime != null" >
+        article_comment_time = #{record.articleCommentTime,jdbcType=DATE},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update aritcle_comment
+    set article_comment_id = #{record.articleCommentId,jdbcType=INTEGER},
+      article_id = #{record.articleId,jdbcType=INTEGER},
+      author_account = #{record.authorAccount,jdbcType=VARCHAR},
+      article_comment_content = #{record.articleCommentContent,jdbcType=VARCHAR},
+      article_comment_sec = #{record.articleCommentSec,jdbcType=INTEGER},
+      article_comment_time = #{record.articleCommentTime,jdbcType=DATE},
+      user_account = #{record.userAccount,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

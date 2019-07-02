@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.ShopLevelMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.ShopLevel" >
+    <result column="shop_level_id" property="shopLevelId" jdbcType="INTEGER" />
+    <result column="shop_level_name" property="shopLevelName" jdbcType="VARCHAR" />
+    <result column="shop_level_low" property="shopLevelLow" jdbcType="VARCHAR" />
+    <result column="shop_level_high" property="shopLevelHigh" jdbcType="VARCHAR" />
+    <result column="shop_level_desc" property="shopLevelDesc" jdbcType="VARCHAR" />
+    <result column="shop_level_ext" property="shopLevelExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shop_level_id, shop_level_name, shop_level_low, shop_level_high, shop_level_desc, 
+    shop_level_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.ShopLevelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shop_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.ShopLevelExample" >
+    delete from shop_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.ShopLevel" >
+    insert into shop_level (shop_level_id, shop_level_name, shop_level_low, 
+      shop_level_high, shop_level_desc, shop_level_ext
+      )
+    values (#{shopLevelId,jdbcType=INTEGER}, #{shopLevelName,jdbcType=VARCHAR}, #{shopLevelLow,jdbcType=VARCHAR}, 
+      #{shopLevelHigh,jdbcType=VARCHAR}, #{shopLevelDesc,jdbcType=VARCHAR}, #{shopLevelExt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.ShopLevel" >
+    insert into shop_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopLevelId != null" >
+        shop_level_id,
+      </if>
+      <if test="shopLevelName != null" >
+        shop_level_name,
+      </if>
+      <if test="shopLevelLow != null" >
+        shop_level_low,
+      </if>
+      <if test="shopLevelHigh != null" >
+        shop_level_high,
+      </if>
+      <if test="shopLevelDesc != null" >
+        shop_level_desc,
+      </if>
+      <if test="shopLevelExt != null" >
+        shop_level_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopLevelId != null" >
+        #{shopLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="shopLevelName != null" >
+        #{shopLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLevelLow != null" >
+        #{shopLevelLow,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLevelHigh != null" >
+        #{shopLevelHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLevelDesc != null" >
+        #{shopLevelDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLevelExt != null" >
+        #{shopLevelExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.ShopLevelExample" resultType="java.lang.Integer" >
+    select count(*) from shop_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_level
+    <set >
+      <if test="record.shopLevelId != null" >
+        shop_level_id = #{record.shopLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopLevelName != null" >
+        shop_level_name = #{record.shopLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLevelLow != null" >
+        shop_level_low = #{record.shopLevelLow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLevelHigh != null" >
+        shop_level_high = #{record.shopLevelHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLevelDesc != null" >
+        shop_level_desc = #{record.shopLevelDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLevelExt != null" >
+        shop_level_ext = #{record.shopLevelExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_level
+    set shop_level_id = #{record.shopLevelId,jdbcType=INTEGER},
+      shop_level_name = #{record.shopLevelName,jdbcType=VARCHAR},
+      shop_level_low = #{record.shopLevelLow,jdbcType=VARCHAR},
+      shop_level_high = #{record.shopLevelHigh,jdbcType=VARCHAR},
+      shop_level_desc = #{record.shopLevelDesc,jdbcType=VARCHAR},
+      shop_level_ext = #{record.shopLevelExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

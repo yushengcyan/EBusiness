@@ -1,0 +1,43 @@
+/*评论内容*/
+.content{
+    margin-left: -30px;
+}
+.content li{
+    list-style-type: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/*文章样式*/
+#articleContent{
+    /*首行缩进*/
+    text-indent: 30px;
+    /*字间距*/
+    letter-spacing: 0.3rem;
+    text-align: left;
+}
+#author{
+    margin-bottom: 15px;
+    color: cornflowerblue;
+    text-align:center;
+    font-size: 18px;
+}
+/*作者账号信息*/
+#authorInfo>div{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#authorInfo>div>label{
+    vertical-align: middle;
+    width: 38%;
+    text-align: right;
+    display: inline-block;
+    margin-bottom: 0px;
+
+}
+#authorInfo>div>input{
+    width: 45%;
+    vertical-align: middle;
+    border: none;
+    background-color: transparent;
+}

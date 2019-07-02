@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.EBusiness.dao.interfaces.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.EBusiness.dao.bo.OrderInfo" >
+    <result column="user_orde_id" property="userOrdeId" jdbcType="INTEGER" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="merchant_account" property="merchantAccount" jdbcType="VARCHAR" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="merchant_address" property="merchantAddress" jdbcType="VARCHAR" />
+    <result column="commodity_id" property="commodityId" jdbcType="VARCHAR" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_price" property="commodityPrice" jdbcType="DECIMAL" />
+    <result column="commodity_number" property="commodityNumber" jdbcType="INTEGER" />
+    <result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+    <result column="order_money" property="orderMoney" jdbcType="DECIMAL" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="user_phone_number" property="userPhoneNumber" jdbcType="VARCHAR" />
+    <result column="order_trade_time" property="orderTradeTime" jdbcType="TIMESTAMP" />
+    <result column="order_start_time" property="orderStartTime" jdbcType="TIMESTAMP" />
+    <result column="order_end_time" property="orderEndTime" jdbcType="TIMESTAMP" />
+    <result column="order_ext" property="orderExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_orde_id, user_account, merchant_account, user_address, merchant_address, commodity_id, 
+    commodity_name, commodity_price, commodity_number, discount_price, order_money, order_status, 
+    user_phone_number, order_trade_time, order_start_time, order_end_time, order_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.EBusiness.dao.bo.OrderInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.EBusiness.dao.bo.OrderInfoExample" >
+    delete from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.EBusiness.dao.bo.OrderInfo" >
+    insert into order_info (user_orde_id, user_account, merchant_account, 
+      user_address, merchant_address, commodity_id, 
+      commodity_name, commodity_price, commodity_number, 
+      discount_price, order_money, order_status, 
+      user_phone_number, order_trade_time, order_start_time, 
+      order_end_time, order_ext)
+    values (#{userOrdeId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{merchantAccount,jdbcType=VARCHAR}, 
+      #{userAddress,jdbcType=VARCHAR}, #{merchantAddress,jdbcType=VARCHAR}, #{commodityId,jdbcType=VARCHAR}, 
+      #{commodityName,jdbcType=VARCHAR}, #{commodityPrice,jdbcType=DECIMAL}, #{commodityNumber,jdbcType=INTEGER}, 
+      #{discountPrice,jdbcType=DECIMAL}, #{orderMoney,jdbcType=DECIMAL}, #{orderStatus,jdbcType=INTEGER}, 
+      #{userPhoneNumber,jdbcType=VARCHAR}, #{orderTradeTime,jdbcType=TIMESTAMP}, #{orderStartTime,jdbcType=TIMESTAMP}, 
+      #{orderEndTime,jdbcType=TIMESTAMP}, #{orderExt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.EBusiness.dao.bo.OrderInfo" >
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userOrdeId != null" >
+        user_orde_id,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="merchantAccount != null" >
+        merchant_account,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="merchantAddress != null" >
+        merchant_address,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="commodityPrice != null" >
+        commodity_price,
+      </if>
+      <if test="commodityNumber != null" >
+        commodity_number,
+      </if>
+      <if test="discountPrice != null" >
+        discount_price,
+      </if>
+      <if test="orderMoney != null" >
+        order_money,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="userPhoneNumber != null" >
+        user_phone_number,
+      </if>
+      <if test="orderTradeTime != null" >
+        order_trade_time,
+      </if>
+      <if test="orderStartTime != null" >
+        order_start_time,
+      </if>
+      <if test="orderEndTime != null" >
+        order_end_time,
+      </if>
+      <if test="orderExt != null" >
+        order_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userOrdeId != null" >
+        #{userOrdeId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantAccount != null" >
+        #{merchantAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantAddress != null" >
+        #{merchantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null" >
+        #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityNumber != null" >
+        #{commodityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="discountPrice != null" >
+        #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderMoney != null" >
+        #{orderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userPhoneNumber != null" >
+        #{userPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTradeTime != null" >
+        #{orderTradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStartTime != null" >
+        #{orderStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderEndTime != null" >
+        #{orderEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderExt != null" >
+        #{orderExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.EBusiness.dao.bo.OrderInfoExample" resultType="java.lang.Integer" >
+    select count(*) from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_info
+    <set >
+      <if test="record.userOrdeId != null" >
+        user_orde_id = #{record.userOrdeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchantAccount != null" >
+        merchant_account = #{record.merchantAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null" >
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchantAddress != null" >
+        merchant_address = #{record.merchantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityId != null" >
+        commodity_id = #{record.commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityName != null" >
+        commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityPrice != null" >
+        commodity_price = #{record.commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.commodityNumber != null" >
+        commodity_number = #{record.commodityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.discountPrice != null" >
+        discount_price = #{record.discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderMoney != null" >
+        order_money = #{record.orderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderStatus != null" >
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userPhoneNumber != null" >
+        user_phone_number = #{record.userPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderTradeTime != null" >
+        order_trade_time = #{record.orderTradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderStartTime != null" >
+        order_start_time = #{record.orderStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderEndTime != null" >
+        order_end_time = #{record.orderEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderExt != null" >
+        order_ext = #{record.orderExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_info
+    set user_orde_id = #{record.userOrdeId,jdbcType=INTEGER},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      merchant_account = #{record.merchantAccount,jdbcType=VARCHAR},
+      user_address = #{record.userAddress,jdbcType=VARCHAR},
+      merchant_address = #{record.merchantAddress,jdbcType=VARCHAR},
+      commodity_id = #{record.commodityId,jdbcType=VARCHAR},
+      commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      commodity_price = #{record.commodityPrice,jdbcType=DECIMAL},
+      commodity_number = #{record.commodityNumber,jdbcType=INTEGER},
+      discount_price = #{record.discountPrice,jdbcType=DECIMAL},
+      order_money = #{record.orderMoney,jdbcType=DECIMAL},
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
+      user_phone_number = #{record.userPhoneNumber,jdbcType=VARCHAR},
+      order_trade_time = #{record.orderTradeTime,jdbcType=TIMESTAMP},
+      order_start_time = #{record.orderStartTime,jdbcType=TIMESTAMP},
+      order_end_time = #{record.orderEndTime,jdbcType=TIMESTAMP},
+      order_ext = #{record.orderExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <!--获取交易总额-->
+  <select id="getTotlaOrderMoney" parameterType="com.EBusiness.dao.bo.OrderInfoExample" resultType="java.lang.Float">
+    select SUM(order_money) from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+</mapper>

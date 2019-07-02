@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <!-- 自适应屏幕分辨率-->
+    <meta name="viewport" content="width=device-width,inital-scale=1">
+
+    <link rel="stylesheet" href="../../css/util/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/module/frontSite/HomePage.css">
+    <link rel="stylesheet" href="../../css/util/footDiv.css">
+    <!-- 首页-->
+    <title>HomePage</title>
+</head>
+<body>
+    <div class="container">
+        <!--开店弹窗-->
+        <div class="logIn" id="addShopFloat" style="display: none">
+            <div style="height: 30px;">
+                <h4><strong>申请开店</strong></h4>
+            </div>
+            <div>
+                <label for="">店铺名:</label>
+                <input type="text" id="shopName">
+            </div>
+            <div>
+                <label for="">店主名:</label>
+                <input type="text" id="shopUserName">
+            </div>
+            <div>
+                <label for="">发货地:</label>
+                <input type="text" id="shopAddress">
+            </div>
+            <div style="text-align: center">
+                <button id="addShopInfo" class="btn btn-info" style="margin-right: 30px">确认开店</button>
+                <button class="btn btn-warning cancel" style="margin-left: 30px">取消</button>
+            </div>
+        </div>
+        <!-- 导航栏-->
+        <nav class="navbar navbar-default row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="navbar-header navdiv">
+                    <a href="#" class="navbar-brand"> 图标</a>
+                </div>
+                <div class="navbar-left" style="margin-top: 10px">
+                    <ul class="nav nav-pills">
+                        <li class="active navulli"><a href="#" >首页</a></li>
+                        <li class="navulli"><a href="#" id="communityCenter">精选社区</a></li>
+                        <li class="navulli dropdown" style="margin-left: 15px">
+                            <a href="#" id="shopCenter" class="dropdown-toggle" data-toggle="dropdown">
+                                商家中心<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="addShop">申请开店</a></li>
+                                <!--分割符-->
+                                <li class="divider"></li>
+                                <li><a href="#" id="ownShop">已有店铺</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar navbar-left navdiv">
+                    <ul class="nav nav-pills">
+                        <li class="navulli">
+                            <a href="#" id="userCenter">个人中心</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--搜索框-->
+                <div class="navbar-left" style="margin-top: 10px">
+                    <form class="navbar-form " role="search">
+                        <div class="input-group">
+                            <input type="text" id="searchContent" placeholder="请输入搜索内容"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="searchPro" type="button" style="height: 26px;">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true" style=""></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="navbar navbar-right" style="margin-top: 10px">
+                    <ul class="nav nav-pills">
+                        <li class="navulli">
+                            <a href="#" id="log"><span class="glyphicon glyphicon-user"></span><span>登录</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 类别模块-->
+        <div >
+            <ul class="nav nav-pills" id="type" style="justify-content: space-around;">
+                <li><a href="#" class="typeClick">零食</a></li>
+                <li><a href="#" class="typeClick">衣服</a></li>
+                <li><a href="#" class="typeClick">鞋子</a></li>
+                <li><a href="#" class="typeClick">手机</a></li>
+            </ul>
+        </div>
+        <script id="typeTmpl" type="text/x-jsrender">
+            {{for}}
+                <li><a href="#" class="typeClick" typeId="{{:commodityTypeId}}">{{:commodityTypeName}}</a></li>
+            {{/for}}
+        </script>
+        <!-- 登录弹窗-->
+        <div id="logIn" class="logIn" style="display: none;border: 3px solid #1f3781">
+            <div class="form-group" style="border: none">
+                <div class="form-control" style="border: none;">
+                <img src="../../images/symbol/window-close-symbolic.png" alt="关闭图标" id="close" class="signClose"/>
+                </div>
+            </div>
+            <form action="" class="form-horizontal" style="padding-top: 20px;">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" id="foruserName" for="userName">账号</label>
+                    <div class="col-md-8">
+                        <input type="text" id="userName" class="form-control" aria-describedby="foruserName" placeholder="请输入账号" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="password">密码</label>
+                    <div class="col-md-8">
+                        <input type="text" id="password" class="form-control" placeholder="请输入账号" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 col-md-offset-1">
+                        <label><a href="">忘记密码</a></label>
+                    </div>
+                    <div class="col-md-4 col-md-offset-2">
+                        <label><a href="">注册帐号</a></label>
+                    </div>
+                </div>
+                <button class="btn btn-default btn-block btn-primary">登录</button>
+            </form>
+        </div>
+        <!-- 注册弹窗-->
+        <div id="register" class="logIn" style="display: none">
+            <div class="form-group">
+                <div class="form-control">
+                    <img src="../../images/symbol/window-close-symbolic.png" alt="关闭图标" onclick="close" class="signClose"/>
+                </div>
+                <form action="" class="form-horizontal" style="padding-top: 20px">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" id="regusername" for="userName">注册号码</label>
+                        <div class="col-md-8">
+                            <input type="text" id="regname" class="form-control" aria-describedby="regusername" placeholder="请输入账号" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="password">密码</label>
+                        <div class="col-md-8">
+                            <input type="text" id="regpwd" class="form-control" placeholder="请输入账号" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="password">确认密码</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="请输入账号" />
+                        </div>
+                    </div>
+
+                    <button class="form-control btn btn-default">注册</button>
+
+                </form>
+            </div>
+
+        </div>
+        <!-- 主体页面-->
+        <div class="row">
+            <div class="col-md-12" >
+                <!--商品信息-->
+                <div id="proInf" style="width: 1200px">
+                    <ul class="proUl">
+                        <li>
+                            <div>
+                                <div class="product-img">
+                                    <img src="../../upload/ProductImg/sp_3_10007_1.jpg" alt="" class="product-img">
+                                </div>
+                                <div>
+                                    ￥555
+                                </div>
+                                <div>
+                                    商品名
+                                </div>
+                                <div>
+                                    店铺
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="product-img">
+                                    <img src="../../upload/ProductImg/sp_3_10007_1.jpg" alt="" class="product-img">
+                                </div>
+                                <div>
+                                    ￥555
+                                </div>
+                                <div>
+                                    商品名
+                                </div>
+                                <div>
+                                    店铺
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="product-img">
+                                    <img src="../../upload/ProductImg/sp_3_10007_1.jpg" alt="" class="product-img">
+                                </div>
+                                <div>
+                                    ￥555
+                                </div>
+                                <div>
+                                    商品名
+                                </div>
+                                <div>
+                                    店铺
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="product-img">
+                                    <img src="../../upload/ProductImg/sp_3_10007_1.jpg" alt="" class="product-img">
+                                </div>
+                                <div>
+                                    ￥555
+                                </div>
+                                <div>
+                                    商品名
+                                </div>
+                                <div>
+                                    店铺
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="product-img">
+                                    <img src="../../upload/ProductImg/sp_3_10007_1.jpg" alt="" class="product-img">
+                                </div>
+                                <div>
+                                    ￥555
+                                </div>
+                                <div>
+                                    商品名
+                                </div>
+                                <div>
+                                    店铺
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <script id="proInfoTmp" type="text/x-jsrender">
+                    <ul class="proUl">
+                       {{for}}
+                        {{for  shopBaseInfoList ~productImgs=productImgs}}
+                       <li>
+                        <div class="shopTabletd" shopAccount={{:shopAccount}} productId={{:#parent.parent.data.commodityBaseInfo.commodityId}}
+                        style="bacfground-color:red">
+                                <div class="product-img">
+                                    <!--<img src="../../upload/ProductImg/sp_3_10007_1.jpg" alt="" class="product-img">-->
+                                    <!--获取父级下的列表-->
+                                    {{for ~productImgs}}
+                                        <img src="../../upload/ProductImg/{{:imgId}}.jpg" alt="" class="product-img">
+                                    {{/for}}
+                                </div>
+                                <div>￥{{:#parent.parent.data.commodityBaseInfo.commodityPrice}}</div>
+                                <div>{{:#parent.parent.data.commodityBaseInfo.commodityName}}</div>
+                                <div><a href="/EBusiness/html/front/ProductDetail.html?shopAccount="+{{:shopAccount}} style="text-decoration: none;">{{:shopName}}</a></div>
+                            </div>
+                       </li>
+                       {{/for}}
+                       {{/for}}
+                    </ul>
+
+                </script>
+
+                <table style="margin-top: 20px;" id="proInfo" class="table table-hover"></table>
+                <script id="proInfoTmpl" type="text/x-jsrender">
+                    {{for}}
+                    <tr class="shopTabletr">
+                        {{for shopBaseInfoList ~productImgs=productImgs}}
+                        <td style="cursor:pointer">
+                            <div class="shopTabletd" shopAccount={{:shopAccount}} productId={{:#parent.parent.data.commodityBaseInfo.commodityId}}>
+                                <div class="product-img">
+                                    <!--<img src="../../upload/ProductImg/sp_3_10007_1.jpg" alt="" class="product-img">-->
+                                    <!--获取父级下的列表-->
+                                    {{for ~productImgs}}
+                                        <img src="../../upload/ProductImg/{{:imgId}}.jpg" alt="" class="product-img">
+                                    {{/for}}
+                                </div>
+                                <div>￥{{:#parent.parent.data.commodityBaseInfo.commodityPrice}}</div>
+                                <div>{{:#parent.parent.data.commodityBaseInfo.commodityName}}</div>
+                                <div><a href="/EBusiness/html/front/ProductDetail.html?shopAccount="+{{:shopAccount}} style="none">{{:shopName}}</a></div>
+                            </div>
+                        </td>
+                        {{/for}}
+                    </tr>
+                    {{/for}}
+                </script>
+                <!--店铺信息-->
+                <table class="table table-hover" id="shopInfo"></table>
+                <script id="shopInfoTmpl" type="text/x-jsrender">
+                    <tr class="shopTabletr">
+                    {{for}}
+                        <td class="shopTabletd">
+                        <div class="product-img">
+                                    <!--<img src="../../upload/ProductImg/sp_3_10007_1.jpg" alt="" class="product-img">-->
+                                    <!--获取父级下的列表-->
+                                    {{for ~productImgs}}
+                                        <img src="../../upload/ProductImg/{{:imgId}}.jpg" alt="" class="product-img">
+                                    {{/for}}
+                                </div>
+                        <div>
+                        {{:shopName}}
+                        </div>
+                        </td>
+                    {{/for}}
+                    </tr>
+                </script>
+                <div class="col-md-10" style="text-align: center;display: none;" id="page">
+                    <!--分页插件-->
+                    <nav aria-label="..." style="text-align: right">
+                        <ul class="pagination">
+                            <li class="">
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="">1 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li>
+                                <span>2</span>
+                            </li>
+                            <li>
+                                <a href="" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--底部-->
+    <footer class="footer">
+        <div class="container">
+            <div class="col-md-6">
+                <h1>心晴社区分享电商平台</h1>
+                <p>我们一直致力于追求更好</p>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    <h4>关于我们</h4>
+                    <ul class="list-unstyled">
+                        <li>关于我们</li>
+                        <li>友情链接</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>联系方式</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="">电话</a></li>
+                        <li><a href="">电子邮箱</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>赞助商</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="">心晴</a></li>
+                        <li><a href="">6034</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="../../js/util/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../js/util/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/util/jquery/jquery.params.js"></script>
+    <script type="application/javascript" src="../../js/util/require-2.3.6.js"></script>
+    <script type="application/javascript" src="../../js/module/front/LogOn.js"></script>
+    <script type="text/javascript" src="../../js/util/seajs/2.3.0/dist/sea.js"></script>
+    <script type="text/javascript">
+        seajs.config({
+            base:'/EBusiness/js/',
+            alias:{
+                'jquery':'util/jquery/1.9.1/jquery'
+            },
+            charset:'utf-8',
+        })
+        seajs.use(['module/front/homepage'],function (homepage) {
+//            homepage.Init();
+        })
+    </script>
+</body>
+
+</html>

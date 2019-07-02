@@ -1,0 +1,117 @@
+@charset "UTF-8";
+body{
+    background:url(../../../images/front/logBackground.jpg) no-repeat ;
+    background-position: center;
+    /*将背景图布满整个窗口*/
+    background-size:cover;
+    /*固定背景图，使背景图不会滚动*/
+    background-attachment:fixed;
+}
+.logBlock,.remBlock{
+    width: 400px;
+    height: 320px;
+    text-align: center;
+    /*毛玻璃效果*/
+    background-color: rgba(0, 0, 0, 0.21);
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.logBlock>h3{
+    margin-top: 20px;
+    color: #fff;
+}
+.logBlock input{
+    width: 200px;
+    height: 40px;
+    /*opacity: 0.1;*/
+    /*padding-top: 30px;*/
+    margin-top: 20px;
+    margin-left: 20px;
+    color: #fff;
+    /*设置输入框为透明背景框*/
+    background-color: transparent;
+    border:2px solid #ffffff;
+    /*边框边缘弧度*/
+    border-radius: 4px;
+    font-size: larger;
+    font-weight: 400;
+    padding-left: 10px;
+}
+/* 设置input 框中默认输入值的字体颜色*/
+.logBlock input::-webkit-input-placeholder{
+    color: #ffffff;
+    font-size: smaller;
+    font-weight: 100;
+    /*padding-left: 5px;*/
+}
+.logBlock input:-ms-input-placeholder{
+    color: #ffffff;
+    font-size: small;
+    font-weight: lighter;
+    /*padding-left: 5px;*/
+}
+.logBlock label{
+    color: #fff;
+    font-size: 20px;
+
+}
+.logBlock a{
+    color: #fff;
+    /*margin-top: 15px;*/
+    padding-top: 30px;
+    height: 20px;
+}
+.logBlock button{
+    width: 270px;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+/*提示信息*/
+.tips{
+    height: 20px;
+    text-align: center;
+    color: red;
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 18px;
+}
+/*招回密码窗口*/
+.remBlock label{
+    width: 80px;
+    text-align: right;
+    font-size: 14px;
+    color: #fff;
+    margin-left: -30px;
+}
+.remBlock input{
+    width: 180px;
+    height: 30px;
+    color: #fff;
+    /*设置输入框为透明背景框*/
+    background-color: transparent;
+    border:1px solid #ffffff;
+    /*边框边缘弧度*/
+    border-radius: 4px;
+    font-size: larger;
+    font-weight: 400;
+    padding-left: 10px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+.remBlock input::-webkit-input-placeholder{
+    color: #ffffff;
+    font-size: smaller;
+    font-weight: lighter;
+    /*padding-left: 5px;*/
+}
+.remBlock button{
+    margin-top: 20px;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+
+}
